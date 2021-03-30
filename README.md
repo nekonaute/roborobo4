@@ -46,7 +46,6 @@ Supported platforms:
  * MacOS X
 
 Linux and MacOS installation instructions are described below. Other platforms are not officially supported, but Roborobo was previously shown to run on: MS Windows, Raspbian and Pandora.
-.
 
 ## Linux
 
