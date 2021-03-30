@@ -1,0 +1,12 @@
+recursive-include src *
+recursive-include include *
+recursive-include prj *
+include CMakeLists.txt
+include cmake/*.cmake
+recursive-include pyRoborobo_examples *
+recursive-include data *
+recursive-include docs *
+recursive-include config *
+prune pyRoborobo_examples/logs
+prune logs
+prune build/*

@@ -26,7 +26,7 @@ __Other contributors__
 
  * Jean-Marc Montanier, Berend Weel, Amine Boumaza, Andreas Steyven, Leo Cazenille, Theotime Grohens, and a few others!
 
-## How to cite Roborobo in scientific work
+## How to cite Roborobo in your work
 
 If you use __Roborobo__ in your work, __please cite the following paper__:
 
@@ -34,6 +34,7 @@ If you use __Roborobo__ in your work, __please cite the following paper__:
 
 Link to the paper on Arxiv: http://arxiv.org/abs/1304.2888 
 
+___
 # INSTALLATION
 
 Roborobo basic dependencies are: 
@@ -46,7 +47,6 @@ Supported platforms:
 
 Linux and MacOS installation instructions are described below. Other platforms are not officially supported, but Roborobo was previously shown to run on: MS Windows, Raspbian and Pandora.
 .
-
 
 ## Linux
 
@@ -150,27 +150,52 @@ python setup.py install --force
 ```
 
 Check the QUICK START section below for running a Roborobo example.
-
+___
 # QUICK START
-
-
- * Check _INFO.TXT for a __quick introduction__.
- * Check _FAQ.TXT for __trouble shooting__ and __frequently asked questions__.
- * Check build/sphing/index.html for __pyRoborobo__, the Python interface to Roborobo.
 
 It is highly suggested to use the __python__ interface to Roborobo. Many examples are available in the __pyRoborobo_dev/examples__ folder. If you prefer to use C++, check the examples in the __prj__ folder.
 
-Roborobo (C++) examples can be found in the <your_roborobo_folder>/prj directory.
-
-pyRoborobo (Python interface) examples can be found in the <your_roborobo_folder>/pyRoborobo_dev/examples directory.
-
 Roborobo (C++) and pyRoborobo (Python) both uses three important directories, that should be accessible from where your code (C++ binary or python script) is run. 
 * **_data_** contains image and resources for setting a roborobo environment
-* **_config_** contains configuration files for running a roborobo environment
+* **_config_** contains configuration files for running a roborobo environment 
 * **_logs_** will contain log files generated during a roborobo run
 
 While running an example, type "h" when the focus is on the Roborobo window. Help tips will be displayed in the console.
 
+## Running a Python example
+
+Activate conda environment (if not done already):
+```bash
+conda activate roborobo
+```
+
+Compile and install Roborobo (if not done already):
+```bash
+cd <your_roborobo_folder>
+# python setup.py clean --all -- only if want to rebuild all from scratch
+python setup.py install --force 
+```
+
+Run a pyRoborobo example:
+
+```bash
+    cd <your_roborobo_folder>/pyRoborobo_dev/examples/
+    python tutorial.py
+```
+
+## Build the pyRoborobo API documentation
+
+Build Roborobo's python API documentation:
+```bash
+# conda activate roborobo (if not already activated)
+python setup.py build_sphinx
+```
+
+View pyRoborobo API documentation: 
+
+```bash
+open <your_roborobo_folder>/roborobo4/build/sphinx/html/index.html
+```
 
 ## Running a C++ example
 
@@ -205,42 +230,13 @@ cd <your_roborobo_folder>/build
 ./roborobo -l config/Tutorial.properties
 ```
 
-## Running a Python example
+Roborobo (C++) examples can be found in the <your_roborobo_folder>/prj directory. Note that project selection is achieved from the configuration file (config/filename.properties)
 
-Activate conda environment (if not done already):
-```bash
-conda activate roborobo
-```
+## What next?
 
-Compile and install Roborobo (if not done already):
-```bash
-cd <your_roborobo_folder>
-# python setup.py clean --all -- only if want to rebuild all from scratch
-python setup.py install --force 
-```
+ * Check _INFO.TXT for a __quick introduction__.
+ * Check _FAQ.TXT for __trouble shooting__ and __frequently asked questions__.
+ * Check the examples, and learn by doing.
+___
 
-Run a pyRoborobo example:
-
-```bash
-    cd <your_roborobo_folder>/pyRoborobo_dev/examples/
-    python tutorial.py
-```
-
-* pyRoborobo examples can be found on [github in the pyRoborobo_dev/examples folder](https://github.com/nekonaute/roborobo4/pyRoborobo_dev/examples).
-* build the pyRoborobo API docs (see below)
-
-## Build the pyRoborobo API documentation
-
-Build Roborobo's python API documentation:
-```bash
-# conda activate roborobo (if not already activated)
-python setup.py build_sphinx
-```
-
-View pyRoborobo API documentation: 
-
-```bash
-open <your_roborobo_folder>/roborobo4/build/sphinx/html/index.html
-```
-
-# Thanks for using Roborobo!
+_Thank you for using Roborobo!_
