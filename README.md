@@ -178,8 +178,8 @@ python setup.py install --force
 Run a pyRoborobo example:
 
 ```bash
-    cd <your_roborobo_folder>/pyRoborobo_dev/examples/
-    python tutorial.py
+cd <your_roborobo_folder>/pyRoborobo_dev/examples/
+python tutorial.py
 ```
 
 Many other examples are available in the __pyRoborobo_dev/examples__ folder.
