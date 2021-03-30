@@ -152,7 +152,7 @@ Check the QUICK START section below for running a Roborobo example.
 ___
 # QUICK START
 
-It is highly suggested to use the __python__ interface to Roborobo. Many examples are available in the __pyRoborobo_dev/examples__ folder. If you prefer to use C++, check the examples in the __prj__ folder.
+It is highly suggested to use the __python__ interface to Roborobo, which we refer to as __pyRoborobo__. If you prefer to develop your project in C++, it also possible (check below). pyRoborobo is built as an interface to Roborobo, and though there is of course a cost to use Python instead of pure C++, we empirically consider it worth the ease of development in the context of academic research. For example, the Boids example runs at ~400 fps (pure C++) and ~200 fps (pyRoborobo) on a Macbook pro 13 (early 2019 model).
 
 Roborobo (C++) and pyRoborobo (Python) both uses three important directories, that should be accessible from where your code (C++ binary or python script) is run. 
 * **_data_** contains image and resources for setting a roborobo environment
@@ -181,6 +181,8 @@ Run a pyRoborobo example:
     cd <your_roborobo_folder>/pyRoborobo_dev/examples/
     python tutorial.py
 ```
+
+Many other examples are available in the __pyRoborobo_dev/examples__ folder.
 
 ## Build the pyRoborobo API documentation
 
