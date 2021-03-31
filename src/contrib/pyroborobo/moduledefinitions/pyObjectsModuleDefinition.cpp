@@ -83,6 +83,8 @@ bool: can object register at its actual position
             .def("is_pushed", &PhysicalObject::isPushed, "Triggered when the object is pushed")
             .def("set_color", &PhysicalObject::setDisplayColor, "red"_a, "blue"_a, "green"_a,
                  "Set the color (r,g,b) of the object. r [0, 255], g [0, 255], b [0,255]")
+            .def("set_footprint_color", &PhysicalObject::setFootprintDisplayColor, "red"_a, "blue"_a, "green"_a,
+                 "Set the color (r,g,b) of the object's footprint. r [0, 255], g [0, 255], b [0,255]")
             .def_property_readonly("position", [] (PhysicalObject& self) -> std::tuple<double, double>
                                    {
                                         std::cout<< "cpp: " << self.getXReal() << ", " << self.getYReal() << std::endl;
@@ -185,22 +187,22 @@ green: int
 )doc")
             .def_property_readonly("id", &SquareObject::getId, "int: the id of the object")
             .def_property("solid_height", &SquareObject::getSolidH, [] (SquareObject& self, int value) {self.setSolidH(value);},
-                           "int: the height of the solid part of the object in pixel")
+                           "int: the height (i.e. vertical length) of the solid part of the object in pixel")
             .def("set_solid_height", &SquareObject::setSolidH, "height"_a, "force"_a = false,
                  R"doc(Set the solid height of the square object, if force is true, then no check is performed
 on registration.)doc")
             .def_property("solid_width", &SquareObject::getSolidW,  [] (SquareObject& self, int value) {self.setSolidW(value);},
-                          "int: the width of the solid part of the object in pixel")
+                          "int: the width (i.e. horizontal length) of the solid part of the object in pixel")
             .def("set_solid_width", &SquareObject::setSolidH, "width"_a, "force"_a = false,
                  R"doc(Set the solid width of the square object, if force is true, then no check is performed
 on registration.)doc")
             .def_property("soft_height", &SquareObject::getSoftH, [] (SquareObject& self, int value) {self.setSoftH(value);},
-                          "int: the height of the soft part of the object (can be walked on) in pixel")
+                          "int: the height (i.e. vertical length) of the soft part of the object (can be walked on) in pixel")
             .def("set_soft_height", &SquareObject::setSoftH, "height"_a, "force"_a = false,
                  R"doc(Set the soft height (can be walked on) of the square object, if force is true, then no check is performed
 on registration.)doc")
             .def_property("soft_width", &SquareObject::getSoftW, [] (SquareObject& self, int value) {self.setSoftW(value);},
-                          "int: the width of the soft part of the object (can be walked on) in pixel")
+                          "int: the width (i.e. horizontal length) of the soft part of the object (can be walked on) in pixel")
             .def("set_soft_width", &SquareObject::setSoftW, "width"_a, "force"_a = false,
                  R"doc(Set the soft width (can be walked on) of the square object, if force is true, then no check is performed
 on registration.)doc");

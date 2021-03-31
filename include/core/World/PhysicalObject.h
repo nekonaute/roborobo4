@@ -31,6 +31,10 @@ protected :
     Uint8 _displayColorGreen;
     Uint8 _displayColorBlue;
 
+    Uint8 _footprintDisplayColorRed;
+    Uint8 _footprintDisplayColorGreen;
+    Uint8 _footprintDisplayColorBlue;
+
     int regrowTimeMax; // max iterations before object re-appear - load from properties file.
     int regrowTime; // iterations before object re-appear
     bool registered;  // is it scheduled for regrowing? (ie. hidden)
@@ -98,6 +102,13 @@ public :
         _displayColorRed = r;
         _displayColorGreen = g;
         _displayColorBlue = b;
+    }
+
+    void setFootprintDisplayColor(Uint8 r, Uint8 g, Uint8 b)
+    {
+        _footprintDisplayColorRed = r;
+        _footprintDisplayColorGreen = g;
+        _footprintDisplayColorBlue = b;
     }
 
     void setType(int _type)

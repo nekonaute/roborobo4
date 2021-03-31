@@ -37,8 +37,8 @@ void PhysicalObjectFactory::makeObject(int type)
         gPhysicalObjects.push_back(PyPhysicalObjectFactory::makeObject(valuepytype, id));
         return;
 #else
-        throw std::runtime_error("Python is not activated here, please use pyroborobo from a python interpreter"
-                                 "to run this conf\n");
+        throw std::runtime_error("[ERROR] Python is not activated here, please use pyRoborobo from a python interpreter"
+                                 "to run this configuration.\n");
 #endif
 
     }

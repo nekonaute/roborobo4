@@ -308,6 +308,11 @@ py::object Pyroborobo::addObjectToEnv(py::object obj)
     gPhysicalObjects.emplace_back(c_obj);
     objects.emplace_back(obj);
     gNbOfPhysicalObjects = gPhysicalObjects.size();
+    //std::cout << "gNbOfPhysicalObjects: " << gNbOfPhysicalObjects << std::endl;
+    //std::cout << "gPhysicalObjects contains:";
+    //for (auto& x: gPhysicalObjects)
+    //    std::cout << ' ' << x;
+    //std::cout << '\n';
     return obj;
 }
 

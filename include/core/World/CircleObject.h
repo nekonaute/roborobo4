@@ -54,8 +54,7 @@ public :
     std::string inspect(std::string prefix="") override
     {
         std::stringstream stream;
-        stream << "[INFO] SquareObject with id" << getId() << "\n";
-        stream << "Override inspect to display your own info\n";
+        stream << "[INFO] CircleObject with id " << getId() << "\n";
         return stream.str();
     }
 };
