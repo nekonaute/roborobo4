@@ -235,7 +235,7 @@ Roborobo (C++) examples can be found in the <your_roborobo_folder>/prj directory
 
 ## What next?
 
- * Check _INFO.TXT for a __quick introduction__.
+ * Check _OVERVIEW.TXT for a __quick introduction__.
  * Check _FAQ.TXT for __trouble shooting__ and __frequently asked questions__.
  * Check the examples, and learn by doing.
 ___
