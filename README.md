@@ -49,6 +49,9 @@ Supported platforms:
 
 Linux and MacOS installation instructions are described below. Other platforms are not officially supported, but Roborobo was previously shown to run on: MS Windows, Raspbian and Pandora.
 
+_Remark: if you get a lot of warnings during compilation, this is probably due to already installed pip packages shadowing the newly installed conda packages (e.g. with pybind). Work around for pyBind that may work: conda install -c conda-forge "pybind11>2.6". However the best way is to delete the pip packages and make a clean install of roborobo again__
+
+
 ## Linux
 
 Create a conda environment:
@@ -213,8 +216,6 @@ cd <your_roborobo_folder>
 # python setup.py clean --all -- only if want to rebuild all from scratch
 python setup.py install --force 
 ```
-
-_Remark: if you get a lot of warnings during compilation, this is probably due to already installed pip packages shadowing the newly installed conda packages (e.g. with pybind). Work around for pyBind: conda install -c conda-forge "pybind11>2.6"__
 
 Run a roborobo example:
 
