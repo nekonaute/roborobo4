@@ -34,6 +34,8 @@ If you use __Roborobo__ in your work, __please cite the following paper__:
 
 Link to the paper on Arxiv: http://arxiv.org/abs/1304.2888 
 
+_Works that cite Roborobo_: https://scholar.google.fr/scholar?cites=7785979290259259170
+
 ___
 # INSTALLATION
 
