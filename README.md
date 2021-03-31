@@ -214,6 +214,8 @@ cd <your_roborobo_folder>
 python setup.py install --force 
 ```
 
+_Remark: if you get a lot of warnings during compilation, this is probably due to already installed pip packages shadowing the newly installed conda packages (e.g. with pybind). Work around for pyBind: conda install -c conda-forge "pybind11>2.6"__
+
 Run a roborobo example:
 
 ```bash
