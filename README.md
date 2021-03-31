@@ -72,12 +72,12 @@ conda create --name roborobo numpy pybind11
 conda activate roborobo
 ```
 
-Install Python dependencies for Roborobo (numpy and pybind11) 
+Install Python dependencies for Roborobo (numpy, pybind11, sphinx, ...) 
 
 ```bash
 conda install numpy setuptools
-conda install -c conda-forge pybind11  # install latest pybind11
-conda install sphinx recommonmark sphinx_rtd_theme numpydoc  # install dependencies for the doc
+conda install -c conda-forge pybind11
+conda install sphinx recommonmark sphinx_rtd_theme numpydoc
 
 # or if you prefer to use pip instead of Conda: 
 # pip install -U pybind11
@@ -122,12 +122,12 @@ conda create --name roborobo numpy pybind11
 conda activate roborobo
 ```
 
-Install Python dependencies for Roborobo (numpy and pybind11) 
+Install Python dependencies for Roborobo (numpy, pybind11, sphinx, ...) 
 
 ```bash
 conda install numpy setuptools
-conda install -c conda-forge pybind11  # install latest pybind11
-conda install sphinx recommonmark sphinx_rtd_theme numpydoc  # install dependencies for the doc
+conda install -c conda-forge pybind11
+conda install sphinx recommonmark sphinx_rtd_theme numpydoc
 
 # or if you prefer to use pip instead of Conda: 
 # pip install -U pybind11
