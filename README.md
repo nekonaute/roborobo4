@@ -57,14 +57,6 @@ Install required tools:
 sudo apt install git build-essential cmake 
 ```
 
-Get your local copy of Roborobo:
-
-```bash
-mkdir <your_roborobo_folder>
-cd <your_roborobo_folder>
-git clone https://github.com/nekonaute/roborobo4.git
-```
-
 Create a conda environment:
 
 ```bash
@@ -90,10 +82,17 @@ Install C++ dependencies for Roborobo (SDL2 and boost):
 sudo apt-get install libsdl2-dev libsdl2-image-dev libboost-dev libeigen3-dev
 ```
 
+Get your local copy of Roborobo:
+
+```bash
+git clone https://github.com/nekonaute/roborobo4.git
+```
+
 Compile and install Roborobo:
 
 ```bash
 # conda activate roborobo (if not already activated)
+cd roborobo4
 python setup.py install --force
 ```
 
@@ -105,14 +104,6 @@ Install required tools:
 
 ```bash
 brew install cmake 
-```
-
-Get your local copy of Roborobo:
-
-```bash
-mkdir <your_roborobo_folder>
-cd <your_roborobo_folder>
-git clone https://github.com/nekonaute/roborobo4.git
 ```
 
 Create a conda environment:
@@ -143,10 +134,17 @@ brew install boost
 brew install eigen
 ```
 
+Get your local copy of Roborobo:
+
+```bash
+git clone https://github.com/nekonaute/roborobo4.git
+```
+
 Compile and install Roborobo:
 
 ```bash
 # conda activate roborobo (if not already activated)
+cd roborobo4
 python setup.py install --force
 ```
 
