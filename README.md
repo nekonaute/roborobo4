@@ -185,11 +185,8 @@ Build Roborobo's python API documentation:
 python setup.py build_sphinx
 ```
 
-View pyRoborobo API documentation: 
+The pyRoborobo API documentation is now in _build/sphinx/html/index.html_
 
-```bash
-open <your_roborobo_folder>/roborobo4/build/sphinx/html/index.html
-```
 
 ## Running a C++ example
 
