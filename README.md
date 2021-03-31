@@ -51,12 +51,6 @@ Linux and MacOS installation instructions are described below. Other platforms a
 
 ## Linux
 
-Install required tools:
-
-```bash
-sudo apt install git build-essential cmake 
-```
-
 Create a conda environment:
 
 ```bash
@@ -76,9 +70,10 @@ conda install sphinx recommonmark sphinx_rtd_theme numpydoc
 # pip install -U numpy
 ```
 
-Install C++ dependencies for Roborobo (SDL2 and boost):
+Install C++ dependencies for Roborobo (Cmake, SDL2, boost and eigen):
 
 ```bash
+sudo apt install git build-essential cmake 
 sudo apt-get install libsdl2-dev libsdl2-image-dev libboost-dev libeigen3-dev
 ```
 
@@ -100,12 +95,6 @@ Check the QUICK START section below for running a Roborobo example.
 
 ## Mac OS
 
-Install required tools:
-
-```bash
-brew install cmake 
-```
-
 Create a conda environment:
 
 ```bash
@@ -125,9 +114,10 @@ conda install sphinx recommonmark sphinx_rtd_theme numpydoc
 # pip install -U numpy
 ```
 
-Install C++ dependencies for Roborobo (SDL2, boost and eigen):
+Install C++ dependencies for Roborobo (Cmake, SDL2, boost and eigen):
 
 ```bash
+brew install cmake 
 brew install sdl2
 brew install sdl2_image
 brew install boost
