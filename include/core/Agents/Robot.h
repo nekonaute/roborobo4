@@ -43,7 +43,7 @@ private:
 
     void traceRayRGB(SDL_Surface *dst, int x1, int y1, int x2, int y2, Uint8 r, Uint8 g,
                      Uint8 b); // for screen rendering only
-        int castSensorRay(SDL_Surface * image, double x1, double y1, double * x2pt, double * y2pt , int __maxValue = -1);
+        int castSensorRay(SDL_Surface * image, double x1, double y1, double * x2pt, double * y2pt , int __maxValue = -1, int __idIgnore = -1 );
     
         void initRobotPhysics( );
         void applyRobotPhysics( );

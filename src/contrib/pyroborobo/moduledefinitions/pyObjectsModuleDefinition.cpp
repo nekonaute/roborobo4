@@ -87,7 +87,7 @@ bool: can object register at its actual position
                  "Set the color (r,g,b) of the object's footprint. r [0, 255], g [0, 255], b [0,255]")
             .def_property_readonly("position", [] (PhysicalObject& self) -> std::tuple<double, double>
                                    {
-                                        std::cout<< "cpp: " << self.getXReal() << ", " << self.getYReal() << std::endl;
+                                       // std::cout<< "cpp: " << self.getXReal() << ", " << self.getYReal() << std::endl;
                                        return {self.getXReal(), self.getYReal()};
                                    },
                                    "Return the position of the object"

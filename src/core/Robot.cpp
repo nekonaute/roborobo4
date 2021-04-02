@@ -756,7 +756,7 @@ bool Robot::isCollision()
 
 
  /**
-    * Display agent on screen. Add information caption if needed.
+    * Display agent on screen.
 	* 
 	* (render mode only) 
     */
@@ -823,7 +823,7 @@ void Robot::show(SDL_Surface *surface) // display on screen
 			double y2 = (_wm->_yReal + _wm->getCameraSensorValue(i,SENSOR_TARGETNORM) * sin( _wm->getCameraSensorValue(i,SENSOR_TARGETANGLE) + _wm->_agentAbsoluteOrientation * M_PI / 180 ) ) ;
 
 			// sensor ray casting is also performed in the move method -- this time we dont store data (already done). -- this one is only used to *display* the ray. _cameraSensors[i][5] contains the length, but not the (x2,y2) location where the ray stops.
-            castSensorRay(gEnvironmentImage, x1, y1, &x2, &y2, _wm->getCameraSensorMaximumDistanceValue(i)); // x2 and y2 are overriden with collision coordinate if ray hits object.
+            castSensorRay(gEnvironmentImage, x1, y1, &x2, &y2, _wm->getCameraSensorMaximumDistanceValue(i), _wm->getId()); // x2 and y2 are overriden with collision coordinate if ray hits object (except oneself).
 
 			// display on screen
 			if ( _wm->getCameraSensorValue(i,SENSOR_DISTANCEVALUE) < _wm->getCameraSensorMaximumDistanceValue(i)-1 ) //gSensorRange-1 )
@@ -914,30 +914,34 @@ void Robot::traceRayRGB(SDL_Surface * image, int x1, int y1, int x2, int y2, Uin
     drawLine( image, x1, y1, x2, y2, r, g, b );
 }
 
+
 /**
  cast (sensor) ray from (x1,y1) to (x2,y2). Stops whenever ray encounters something. (x2,y2) are update with point of contact
  __maxValue is the maximum distance possible -- ie. if no collision during ray casting (makes it possible to return an exact value without the cost of distance (with sqrt) computation)
  */
-int Robot::castSensorRay(SDL_Surface * image, double x1, double y1, double *x2pt, double *y2pt, int __maxValue )
+int Robot::castSensorRay(SDL_Surface * image, double x1, double y1, double *x2pt, double *y2pt, int __maxValue , int __idIgnore)
 {
     /**/
     int x2 = (int)(*x2pt + 0.5);
     int y2 = (int)(*y2pt + 0.5);
-    
-    bool collision = castLine(image, (int)(x1+0.5), (int)(y1+0.5), &x2, &y2, __maxValue);
-    
+
+    bool collision;
+    if ( __idIgnore == -1 )
+        collision = castLine(image, (int)(x1+0.5), (int)(y1+0.5), &x2, &y2, __maxValue);
+    else
+        collision = castLine(image, (int)(x1+0.5), (int)(y1+0.5), &x2, &y2, __maxValue, __idIgnore+gRobotIndexStartOffset);
+
     *x2pt = (double)x2;
     *y2pt = (double)y2;
-    
+
     if ( collision )
         return sqrt ( ( x1 - *x2pt ) * ( x1 - *x2pt ) + ( y1 - *y2pt ) * ( y1 - *y2pt ) );
     else
-        if ( __maxValue != -1 )
-            return __maxValue;
-        else
-            return gSensorRange;
+    if ( __maxValue != -1 )
+        return __maxValue;
+    else
+        return gSensorRange;
 }
-
 
 /*
  This method prepares agents for applying dynamics. It is called by the World->updateWorld method only once per world iteration.

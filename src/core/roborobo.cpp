@@ -895,6 +895,8 @@ void updateDisplay() // display is called starting when gWorld->getIterations > 
             apply_surface(0, 0, gEnvironmentImage, gScreen, &gCamera);
         }
 
+
+
         if (gNiceRendering) // + ( gDisplayMode != 2 || gSnapshot...? || gVideoRecording...? )   // !n
         {
             // Show landmark(s) on the screen
@@ -918,17 +920,21 @@ void updateDisplay() // display is called starting when gWorld->getIterations > 
             }
 
             // Show agent(s) on the screen
-            for (int i = 0; i != gNbOfRobots; i++)
+            for (int i = 0; i != gNbOfRobots; i++) // !n problem !! 2021-04-02 !!
             {
-                if (gWorld->isRobotRegistered(i))
-                    gWorld->getRobot(i)
-                            ->unregisterRobot(); // remove agent from memory so as to correctly cast sensors (otw: may see itself)
+                // !n - 2021-04-02:
+                //      the commented code below should not be used.
+                //      By registering/unregistering robots, the random updating order may create problems for collisions, possibly allowing overlapping robots ! (this is bad)
+                //      A nasty consequence is that gNiceRendering leads to different outcomes in terms of simulation accuracy!
+
+                //if (gWorld->isRobotRegistered(i))
+                //    gWorld->getRobot(i)->unregisterRobot(); // remove agent from memory so as to correctly cast sensors (otw: may see itself)
 
                 gWorld->getRobot(i)->show(); // show sensor rays.
 
                 // re-registering agents (post-display)
-                if (gWorld->isRobotRegistered(i))
-                    gWorld->getRobot(i)->registerRobot();
+                //if (gWorld->isRobotRegistered(i))
+                //    gWorld->getRobot(i)->registerRobot();
             }
         }
 

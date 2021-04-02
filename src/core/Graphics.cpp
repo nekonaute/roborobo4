@@ -602,26 +602,31 @@ bool castLine(SDL_Surface * image,
               int y1,
               int *x2pt,
               int *y2pt,
-              int maxLength )
+              int maxLength,
+              int ignoreValue)
 {
     int x2 = *x2pt;
     int y2 = *y2pt;
-    
-    uint32_t color = SDL_MapRGBA( image->format, 0xFF, 0xFF, 0xFF, SDL_ALPHA_OPAQUE );
-    
+
+    uint32_t colorDefault = SDL_MapRGBA( image->format, 0xFF, 0xFF, 0xFF, SDL_ALPHA_OPAQUE );
+    uint32_t colorIgnore = colorDefault;
+    if ( ignoreValue != -1 )
+        colorIgnore = SDL_MapRGBA(image->format, ((ignoreValue & 0xFF0000) >> 16), ((ignoreValue & 0xFF00) >> 8), (ignoreValue & 0xFF),
+    SDL_ALPHA_OPAQUE);
+
     int delta_x(x2 - x1);
     // if x1 == x2, then it does not matter what we set here
     signed char const ix((delta_x > 0) - (delta_x < 0));
     delta_x = std::abs(delta_x) << 1;
-    
+
     int delta_y(y2 - y1);
     // if y1 == y2, then it does not matter what we set here
     signed char const iy((delta_y > 0) - (delta_y < 0));
     delta_y = std::abs(delta_y) << 1;
-    
+
     int dist = 0; // distance to obstacle (or to max_length)
 
-    if ( getPixel32( image, x1, y1 ) != color )
+    if ( getPixel32( image, x1, y1 ) != colorDefault && getPixel32( image, x1, y1 ) != colorIgnore)
     {
         *x2pt = x1;
         *y2pt = y1;
@@ -632,7 +637,7 @@ bool castLine(SDL_Surface * image,
     {
         // error may go below zero
         int error(delta_y - (delta_x >> 1));
-        
+
         while (x1 != x2)
         {
             if ((error >= 0) && (error || (ix > 0)))
@@ -641,26 +646,26 @@ bool castLine(SDL_Surface * image,
                 y1 += iy;
             }
             // else do nothing
-            
+
             error += delta_y;
             x1 += ix;
-            
+
             dist++;
 
-            if ( getPixel32( image, x1, y1 ) != color )
+            if ( getPixel32( image, x1, y1 ) != colorDefault && getPixel32( image, x1, y1 ) != colorIgnore )
             {
                 *x2pt = x1;
                 *y2pt = y1;
                 return true;
             }
-            
+
         }
     }
     else
     {
         // error may go below zero
         int error(delta_x - (delta_y >> 1));
-        
+
         while (y1 != y2)
         {
             if ((error >= 0) && (error || (iy > 0)))
@@ -669,13 +674,13 @@ bool castLine(SDL_Surface * image,
                 x1 += ix;
             }
             // else do nothing
-            
+
             error += delta_x;
             y1 += iy;
-            
+
             dist++;
 
-            if ( getPixel32( image, x1, y1 ) != color )
+            if ( getPixel32( image, x1, y1 ) != colorDefault && getPixel32( image, x1, y1 ) != colorIgnore )
             {
                 *x2pt = x1;
                 *y2pt = y1;
@@ -683,6 +688,6 @@ bool castLine(SDL_Surface * image,
             }
         }
     }
-    
+
     return false; // no collision
 }

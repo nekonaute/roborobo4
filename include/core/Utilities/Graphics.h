@@ -94,12 +94,16 @@ void drawLine(SDL_Surface *image,
 // Cast a line. Do not draw. Stops when no-white pixel hit. return updated x2 and y2 (pointers), and collision (true|false).
 // Algorithm: Bresenham
 // adapted from: http://www.roguebasin.com/index.php?title=Bresenham%27s_Line_Algorithm
+// if ignoreValue != -1, then consider ignoreValue as blank. Usage: _ignoreValue = robot_id + gRobotIndexStartOffset
+//  => used to ignore robot self when tracing sensor ray.
 bool castLine(SDL_Surface * image,
-             int x1,
-             int y1,
-             int *x2pt,
-             int *y2pt,
-             int maxLength = -1 );
+              int x1,
+              int y1,
+              int *x2pt,
+              int *y2pt,
+              int maxLength = -1,
+              int ignoreValue = -1
+              );
 
 void renderSnapshot();
 
