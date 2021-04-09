@@ -844,8 +844,9 @@ bool handleKeyEvent(const Uint8 *keyboardStates)
         if (keyboardStates[SDL_SCANCODE_S])
         {
             gSlowMotionMode = !gSlowMotionMode;
-            if (gSlowMotionMode)
+            if (gSlowMotionMode) {
                 gDisplayMode = 0;
+            }
 
             if (gVerbose)
             {
@@ -991,10 +992,13 @@ void updateDisplay() // display is called starting when gWorld->getIterations > 
     if (gFullLoggerRecording == true)
         saveFullLoggerScreenshot("sequence"); // note that screen will be blank if display mode is 2
 
-    if (gWorld->getIterations() == 1)
+    if (gWorld->getIterations() == 1) {
         gDisplayMode = backup_gDisplayMode;
-    else if (gWorld->getIterations() == gMaxIt - 2)
-        gDisplayMode = 0;
+    }
+    else if (gWorld->getIterations() == gMaxIt - 2) {
+        gDisplayMode = 0; // [!n] 2021-05-04 - gMaxIt is ignored in pyRoborobo, but may lead to an undesired switch to slow mode. Simple fix: set gMaxIt=-1 in properties file.
+    }
+
 }
 
 
