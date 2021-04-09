@@ -71,6 +71,7 @@ conda install sphinx recommonmark sphinx_rtd_theme numpydoc
 # or if you prefer to use pip instead of Conda: 
 # pip install -U pybind11
 # pip install -U numpy
+# pip install -U sphinx
 ```
 
 Install C++ dependencies for Roborobo (Cmake, SDL2, boost and eigen):
@@ -115,6 +116,7 @@ conda install sphinx recommonmark sphinx_rtd_theme numpydoc
 # or if you prefer to use pip instead of Conda: 
 # pip install -U pybind11
 # pip install -U numpy
+# pip install -U sphinx
 ```
 
 Install C++ dependencies for Roborobo (Cmake, SDL2, boost and eigen):
