@@ -154,7 +154,7 @@ The best way to learn is to practice. Start from an existing project and toy wit
 
 ** PROPERTIES FILE **
 
-Properties files are plain-text file where you can specify the parameters for your run with keys and values (e.g. gScreenWidth=800). Some parameters are required by roborobo, some other you can add to fit your needs. It is recommended to clone an existing Properties file if you need to create your own keys and values.
+Properties files are plain-text file where you can specify the parameters for your run with keys and values (e.g. gArenaWidth=800). Some parameters are required by roborobo, some other you can add to fit your needs. It is recommended to clone an existing Properties file if you need to create your own keys and values.
 
 Useful information on Properties file:
 - only one Properties file can be passed as argument to roborobo

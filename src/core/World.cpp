@@ -300,9 +300,9 @@ bool World::loadFiles()
         returnValue = false;
     }
 
-    if ( gEnvironmentImage->h != gScreenHeight || gEnvironmentImage->w != gScreenWidth )
+    if ( gEnvironmentImage->h != gArenaHeight || gEnvironmentImage->w != gArenaWidth )
     {
-        std::cerr << "[ERROR] gScreenWidth=" << gScreenWidth <<" and gScreenHeight="<< gScreenHeight << " do not match Environment image dimensions (" << gEnvironmentImage->w << "," << gEnvironmentImage->h <<")\n";
+        std::cerr << "[ERROR] gArenaWidth=" << gArenaWidth <<" and gArenaHeight="<< gArenaHeight << " do not match Environment image dimensions (" << gEnvironmentImage->w << "," << gEnvironmentImage->h <<")\n";
         returnValue = false;
     }
 
@@ -358,9 +358,9 @@ bool World::loadFiles()
     }
 
     // mandatory: image dimensions must be more than display screen dimensions (otw: underfitting)
-    if (gForegroundImage->w < gScreenWidth || gForegroundImage->h < gScreenHeight)
+    if (gForegroundImage->w < gArenaWidth || gForegroundImage->h < gArenaHeight)
     {
-        std::cerr << "[ERROR] foreground image dimensions must be " << gScreenWidth << "x" << gScreenHeight
+        std::cerr << "[ERROR] foreground image dimensions must be " << gArenaWidth << "x" << gArenaHeight
                   << " or higher (given: " << gForegroundImage->w << "x" << gForegroundImage->h << ") \n";
         returnValue = false;
     }

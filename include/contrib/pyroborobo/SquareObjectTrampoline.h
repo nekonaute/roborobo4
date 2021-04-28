@@ -98,7 +98,7 @@ public:
     void trueShow()
     {
         BaseSquare::_visible = true;
-        show(gScreen);
+        show(gArena);
     }
 
 };

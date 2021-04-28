@@ -12,7 +12,7 @@
 #include "RoboroboMain/common.h"
 #include "Utilities/Geometry.h"
 
-extern SDL_Surface *gScreen;
+extern SDL_Surface *gArena;
 
 class LandmarkObject
 {
@@ -93,7 +93,7 @@ class LandmarkObject
     
     virtual void step();
     
-    virtual void show(SDL_Surface *surface = gScreen);
+    virtual void show(SDL_Surface *surface = gArena);
     virtual void hide();
 
     bool _visible;

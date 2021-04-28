@@ -99,7 +99,7 @@ void MovableObject::move()
             // Check for periodic boundary conditions (ie. ensure coodinates are within bounds) [new feature: 2021-04-23]
             if ( _xReal < 0 )
             {
-                _xReal = _xReal + gScreenHeight;
+                _xReal = _xReal + gArenaHeight;
                 if (_xReal < 0) // expected: one iteration
                 {
                     std::cout << "[ERROR] MovableObject is moving too fast.\n";
@@ -107,9 +107,9 @@ void MovableObject::move()
                 }
             }
             else {
-                if (_xReal >= gScreenWidth) {
-                    _xReal = _xReal - gScreenWidth;
-                    if (_xReal >= gScreenWidth) // expected: one iteration
+                if (_xReal >= gArenaWidth) {
+                    _xReal = _xReal - gArenaWidth;
+                    if (_xReal >= gArenaWidth) // expected: one iteration
                     {
                         std::cout << "[ERROR] MovableObject is moving too fast.\n";
                         exit(-1);
@@ -119,7 +119,7 @@ void MovableObject::move()
             }
             if ( _yReal < 0 )
             {
-                _yReal = _yReal + gScreenHeight;
+                _yReal = _yReal + gArenaHeight;
                 if (_yReal < 0) // expected: one iteration
                 {
                     std::cout << "[ERROR] MovableObject is moving too fast.\n";
@@ -127,10 +127,10 @@ void MovableObject::move()
                 }
             }
             else {
-                if ( _yReal >= gScreenHeight )
+                if ( _yReal >= gArenaHeight )
                 {
-                    _yReal = _yReal - gScreenHeight;
-                    if (_yReal >= gScreenHeight) // expected: one iteration
+                    _yReal = _yReal - gArenaHeight;
+                    if (_yReal >= gArenaHeight) // expected: one iteration
                     {
                         std::cout << "[ERROR] MovableObject is moving too fast.\n";
                         exit(-1);

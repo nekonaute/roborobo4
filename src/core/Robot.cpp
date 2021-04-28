@@ -597,7 +597,7 @@ void Robot::move( int __recursiveIt ) // the interface btw agent and world -- in
     // Check for periodic boundary conditions (ie. ensure coodinates are within bounds) [new feature: 2021-04-23]
     if ( _wm->_xReal < 0 )
     {
-        _wm->_xReal = _wm->_xReal + gScreenHeight;
+        _wm->_xReal = _wm->_xReal + gArenaHeight;
         if (_wm->_xReal < 0) // expected: one iteration
         {
             std::cout << "[ERROR] robot is moving too fast.\n";
@@ -605,9 +605,9 @@ void Robot::move( int __recursiveIt ) // the interface btw agent and world -- in
         }
     }
     else {
-        if (_wm->_xReal >= gScreenWidth) {
-            _wm->_xReal = _wm->_xReal - gScreenWidth;
-            if (_wm->_xReal >= gScreenWidth) // expected: one iteration
+        if (_wm->_xReal >= gArenaWidth) {
+            _wm->_xReal = _wm->_xReal - gArenaWidth;
+            if (_wm->_xReal >= gArenaWidth) // expected: one iteration
             {
                 std::cout << "[ERROR] robot is moving too fast.\n";
                 exit(-1);
@@ -617,7 +617,7 @@ void Robot::move( int __recursiveIt ) // the interface btw agent and world -- in
     }
     if ( _wm->_yReal < 0 )
     {
-        _wm->_yReal = _wm->_yReal + gScreenHeight;
+        _wm->_yReal = _wm->_yReal + gArenaHeight;
         if (_wm->_yReal < 0) // expected: one iteration
         {
             std::cout << "[ERROR] robot is moving too fast.\n";
@@ -625,10 +625,10 @@ void Robot::move( int __recursiveIt ) // the interface btw agent and world -- in
         }
     }
     else {
-        if ( _wm->_yReal >= gScreenHeight )
+        if ( _wm->_yReal >= gArenaHeight )
         {
-            _wm->_yReal = _wm->_yReal - gScreenHeight;
-            if (_wm->_yReal >= gScreenHeight) // expected: one iteration
+            _wm->_yReal = _wm->_yReal - gArenaHeight;
+            if (_wm->_yReal >= gArenaHeight) // expected: one iteration
             {
                 std::cout << "[ERROR] robot is moving too fast.\n";
                 exit(-1);

@@ -12,7 +12,7 @@
 #include "RoboroboMain/common.h"
 #include "Utilities/Geometry.h"
 
-extern SDL_Surface *gScreen;
+extern SDL_Surface *gArena;
 
 class PhysicalObject
 {

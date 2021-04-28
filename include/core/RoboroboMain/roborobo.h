@@ -170,11 +170,11 @@ extern int gEnergyItemDefaultMode; // 0,1,2,... cf. EnergyItem class.
 
 
 //Screen attributes
-extern int gScreenWidth;
-extern int gScreenHeight;
-extern int gScreenDisplayWidth;
-extern int gScreenDisplayHeight;
-extern int gScreenBPP; // bits per pixel color (32 bits)
+extern int gArenaWidth;
+extern int gArenaHeight;
+extern int gDisplayScreenWidth;
+extern int gDisplayScreenHeight;
+extern int gArenaBPP; // bits per pixel color (32 bits)
 extern int gFramesPerSecond; // frame rate
 
 //The robot dimensions
@@ -225,10 +225,10 @@ extern SDL_Rect gCamera;
 
 //image surfaces
 extern SDL_Surface *gSnapshot;			// surface for rendering snapshot (prior to save to disk)
-extern SDL_Surface *gScreen;			// surface for rendering (possibly used for display)
-extern SDL_Texture *gScreenTexture;     // texture to transfer surface to renderer
-extern SDL_Renderer *gScreenRenderer;   // renderer
-extern SDL_Window   *gScreenWindow;     // window
+extern SDL_Surface *gArena;			// surface for rendering (possibly used for display)
+extern SDL_Texture *gArenaTexture;     // texture to transfer surface to renderer
+extern SDL_Renderer *gArenaRenderer;   // renderer
+extern SDL_Window   *gArenaWindow;     // window
 
 extern SDL_Surface *gForegroundImage;	// "foreground" image, mostly decorative -- intended to be a "nice" representation of egEnvironmentImage
 extern SDL_Surface *gEnvironmentImage;	// the real environment: all obstacle assume color #000001, should be close to gForegroundImage

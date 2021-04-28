@@ -12,7 +12,7 @@
 
 #include "RoboroboMain/common.h"
 
-extern SDL_Surface *gScreen;
+extern SDL_Surface *gArena;
 
 class Agent
 {
@@ -41,7 +41,7 @@ class Agent
 		virtual void stepBehavior(const Uint8* __keyboardStates) = 0;
     
 		virtual void move(int recursiveIt);
-        virtual void show(SDL_Surface *surface = gScreen);
+        virtual void show(SDL_Surface *surface = gArena);
     
 		//Sets the camera over the dot
 		void set_camera();

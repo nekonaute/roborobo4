@@ -140,7 +140,7 @@ void CircleObject::hide()
     Uint8 g = 0xFF;
     Uint8 b = 0xFF;
     
-    Uint32 color = SDL_MapRGBA(gScreen->format,r,g,b,SDL_ALPHA_OPAQUE);
+    Uint32 color = SDL_MapRGBA(gArena->format,r,g,b,SDL_ALPHA_OPAQUE);
     
     for (Sint16 xColor = getXCenterPixel() - Sint16(_footprintRadius) ; xColor < getXCenterPixel() + Sint16(_footprintRadius) ; xColor++)
     {
@@ -148,7 +148,7 @@ void CircleObject::hide()
         {
             if ((sqrt ( pow (xColor-getXCenterPixel(),2) + pow (yColor - getYCenterPixel(),2))) < _footprintRadius)
             {
-                putPixel32_pbc(gScreen, xColor, yColor,  color);
+                putPixel32_pbc(gArena, xColor, yColor,  color);
             }
         }
     }
@@ -161,7 +161,7 @@ void CircleObject::hide()
 		{
 			if ((sqrt ( pow (xColor-getXCenterPixel(),2) + pow (yColor - getYCenterPixel(),2))) < _radius)
 			{
-                putPixel32_pbc(gScreen, xColor, yColor,  color);
+                putPixel32_pbc(gArena, xColor, yColor,  color);
 			}
 		}
 	}

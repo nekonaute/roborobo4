@@ -96,7 +96,7 @@ void LandmarkObject::hide()
     Uint8 r = 0xFF;
     Uint8 g = 0xFF;
     Uint8 b = 0xFF;
-    Uint32 color = SDL_MapRGBA(gScreen->format,r,g,b,SDL_ALPHA_OPAQUE);
+    Uint32 color = SDL_MapRGBA(gArena->format,r,g,b,SDL_ALPHA_OPAQUE);
     
     
     for (Sint16 xColor = _xCenterPixel - Sint16(_radius) ; xColor < _xCenterPixel + Sint16(_radius) ; xColor++)
@@ -105,7 +105,7 @@ void LandmarkObject::hide()
         {
             if ((sqrt ( pow (xColor-_xCenterPixel,2) + pow (yColor - _yCenterPixel,2))) < _radius)
             {
-                putPixel32_pbc(gScreen, xColor, yColor, color);
+                putPixel32_pbc(gArena, xColor, yColor, color);
             }
         }
     }

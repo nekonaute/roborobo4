@@ -141,7 +141,7 @@ int gRandomSeed = -1; // (default value should be "-1" => time-based random seed
 bool gVerbose = true;
 bool gBatchMode = false;
 
-int gScreenBPP = 32; // bits per pixel color (32 bits)
+int gArenaBPP = 32; // bits per pixel color (32 bits)
 int gFramesPerSecond = 60; // frame rate
 
 int gLocationFinderMaxNbOfTrials = 100;
@@ -233,12 +233,12 @@ int gPhysicalObjectIndexStartOffset = 0x01;
 int gRobotIndexStartOffset = 0xFFFFF;
 
 //Screen attributes
-int gScreenWidth = 0;
-int gScreenHeight = 0;
+int gArenaWidth = 0;
+int gArenaHeight = 0;
 
 //screen dimensions
-int gScreenDisplayWidth = -1;
-int gScreenDisplayHeight = -1;
+int gDisplayScreenWidth = -1;
+int gDisplayScreenHeight = -1;
 
 //The robot dimensions (default)
 int gRobotWidth = 0;
@@ -294,10 +294,10 @@ SDL_Rect gCamera;
 //image surfaces
 
 SDL_Surface *gSnapshot = nullptr;
-SDL_Surface *gScreen = nullptr;
-SDL_Texture *gScreenTexture = nullptr;
-SDL_Renderer *gScreenRenderer = nullptr;
-SDL_Window *gScreenWindow = nullptr;
+SDL_Surface *gArena = nullptr;
+SDL_Texture *gArenaTexture = nullptr;
+SDL_Renderer *gArenaRenderer = nullptr;
+SDL_Window *gArenaWindow = nullptr;
 
 SDL_Surface *gForegroundImage = nullptr;
 SDL_Surface *gEnvironmentImage = nullptr;
@@ -506,9 +506,9 @@ bool checkEvent()
             if (gEvent.type == SDL_MOUSEBUTTONUP)
             {
                 int width, height, scaled_x, scaled_y;
-                SDL_GetWindowSize(gScreenWindow, &width, &height);
-                scaled_x = (int) (((float) gScreenDisplayWidth / width) * gEvent.button.x);
-                scaled_y = (int) (((float) gScreenDisplayHeight / height) * gEvent.button.y);
+                SDL_GetWindowSize(gArenaWindow, &width, &height);
+                scaled_x = (int) (((float) gDisplayScreenWidth / width) * gEvent.button.x);
+                scaled_y = (int) (((float) gDisplayScreenHeight / height) * gEvent.button.y);
                 inspectAtPixel(scaled_x, scaled_y);
             }
         }
@@ -882,18 +882,18 @@ void updateDisplay() // display is called starting when gWorld->getIterations > 
         {
             if (gBackgroundImage != nullptr)
             {
-                apply_surface(0, 0, gFootprintImage, gScreen, &gCamera);
-                //apply_surface( 0, 0, gBackgroundImage, gScreen, &gCamera ); //!n
+                apply_surface(0, 0, gFootprintImage, gArena, &gCamera);
+                //apply_surface( 0, 0, gBackgroundImage, gArena, &gCamera ); //!n
             }
             else
-                SDL_FillRect(gScreen, &gScreen->clip_rect,
-                             SDL_MapRGBA(gScreen->format, 0xFF, 0xFF, 0xFF, SDL_ALPHA_OPAQUE)); // clear screen
-            apply_surface(0, 0, gForegroundImage, gScreen, &gCamera);
+                SDL_FillRect(gArena, &gArena->clip_rect,
+                             SDL_MapRGBA(gArena->format, 0xFF, 0xFF, 0xFF, SDL_ALPHA_OPAQUE)); // clear screen
+            apply_surface(0, 0, gForegroundImage, gArena, &gCamera);
         }
         else
         {
-            apply_surface(0, 0, gFootprintImage, gScreen, &gCamera);
-            apply_surface(0, 0, gEnvironmentImage, gScreen, &gCamera);
+            apply_surface(0, 0, gFootprintImage, gArena, &gCamera);
+            apply_surface(0, 0, gEnvironmentImage, gArena, &gCamera);
         }
 
 
@@ -905,7 +905,7 @@ void updateDisplay() // display is called starting when gWorld->getIterations > 
             {
                 if (gLandmarks[i]->isVisible())
                 {
-                    gLandmarks[i]->show(gScreen);
+                    gLandmarks[i]->show(gArena);
                 }
             }
 
@@ -915,7 +915,7 @@ void updateDisplay() // display is called starting when gWorld->getIterations > 
                 {
                     if (gPhysicalObjects[i]->isVisible())
                     {
-                        gPhysicalObjects[i]->show(gScreen);
+                        gPhysicalObjects[i]->show(gArena);
                     }
                 }
             }
@@ -965,14 +965,14 @@ void updateDisplay() // display is called starting when gWorld->getIterations > 
 
         // show inspector agent location (single point)
         if (gInspectorMode)
-            inspectorAgent->show(gScreen);
+            inspectorAgent->show(gArena);
 
         if (!gBatchMode)
         {
-            SDL_UpdateTexture(gScreenTexture, nullptr, gScreen->pixels, gScreen->pitch);
-            SDL_RenderClear(gScreenRenderer);
-            SDL_RenderCopy(gScreenRenderer, gScreenTexture, nullptr, nullptr);
-            SDL_RenderPresent(gScreenRenderer);
+            SDL_UpdateTexture(gArenaTexture, nullptr, gArena->pixels, gArena->pitch);
+            SDL_RenderClear(gArenaRenderer);
+            SDL_RenderCopy(gArenaRenderer, gArenaTexture, nullptr, nullptr);
+            SDL_RenderPresent(gArenaRenderer);
         }
 
         //Cap the frame rate
@@ -1694,44 +1694,44 @@ bool loadProperties(const std::string &_propertiesFilename)
         returnValue = false;
     }
 
-    if (gProperties.hasProperty("gScreenHeight"))
+    if (gProperties.hasProperty("gArenaHeight"))
     {
-        convertFromString<int>(gScreenHeight, gProperties.getProperty("gScreenHeight"), std::dec);
+        convertFromString<int>(gArenaHeight, gProperties.getProperty("gArenaHeight"), std::dec);
     }
     else
     {
-        std::cerr << "[ERROR] gScreenHeight value is missing.\n";
+        std::cerr << "[ERROR] gArenaHeight value is missing.\n";
         returnValue = false;
     }
 
-    if (gProperties.hasProperty("gScreenWidth"))
+    if (gProperties.hasProperty("gArenaWidth"))
     {
-        convertFromString<int>(gScreenWidth, gProperties.getProperty("gScreenWidth"), std::dec);
+        convertFromString<int>(gArenaWidth, gProperties.getProperty("gArenaWidth"), std::dec);
     }
     else
     {
-        std::cerr << "[ERROR] gScreenWidth value is missing.\n";
+        std::cerr << "[ERROR] gArenaWidth value is missing.\n";
         returnValue = false;
     }
 
-    if (gProperties.hasProperty("gScreenDisplayHeight"))
+    if (gProperties.hasProperty("gDisplayScreenHeight"))
     {
-        convertFromString<int>(gScreenDisplayHeight, gProperties.getProperty("gScreenDisplayHeight"), std::dec);
+        convertFromString<int>(gDisplayScreenHeight, gProperties.getProperty("gDisplayScreenHeight"), std::dec);
     }
     else
     {
-        std::cerr << "[INFO] gScreenDisplayHeight not defined, using gScreenDisplayHeight value.\n";
-        gScreenDisplayHeight = gScreenHeight;
+        std::cerr << "[INFO] gDisplayScreenHeight not defined, using gArenaHeight value.\n";
+        gDisplayScreenHeight = gArenaHeight;
     }
 
-    if (gProperties.hasProperty("gScreenDisplayWidth"))
+    if (gProperties.hasProperty("gDisplayScreenWidth"))
     {
-        convertFromString<int>(gScreenDisplayWidth, gProperties.getProperty("gScreenDisplayWidth"), std::dec);
+        convertFromString<int>(gDisplayScreenWidth, gProperties.getProperty("gDisplayScreenWidth"), std::dec);
     }
     else
     {
-        std::cerr << "[INFO] gScreenDisplayWidth not defined, using gScreenDisplayWidth value.\n";
-        gScreenDisplayWidth = gScreenWidth;
+        std::cerr << "[INFO] gDisplayScreenWidth not defined, using gArenaWidth value.\n";
+        gDisplayScreenWidth = gArenaWidth;
     }
 
     if (gProperties.hasProperty("gSensorRange"))
@@ -2426,8 +2426,8 @@ void initRoborobo()
 
     gCamera.x = 0;
     gCamera.y = 0;
-    gCamera.w = gScreenWidth;
-    gCamera.h = gScreenHeight;
+    gCamera.w = gArenaWidth;
+    gCamera.h = gArenaHeight;
 
     if (!initSDL(SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE))
     {

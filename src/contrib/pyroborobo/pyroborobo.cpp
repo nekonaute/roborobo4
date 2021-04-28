@@ -107,8 +107,8 @@ void Pyroborobo::start()
     /* Taken from init Roborobo */
     gCamera.x = 0;
     gCamera.y = 0;
-    gCamera.w = gScreenWidth;
-    gCamera.h = gScreenHeight;
+    gCamera.w = gArenaWidth;
+    gCamera.h = gArenaHeight;
 
     if (!initSDL(SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE))
     {

@@ -150,13 +150,13 @@ void SquareObject::hide()
     Uint8 g = 0xFF;
     Uint8 b = 0xFF;
     
-    Uint32 color = SDL_MapRGBA(gScreen->format,r,g,b,SDL_ALPHA_OPAQUE);
+    Uint32 color = SDL_MapRGBA(gArena->format,r,g,b,SDL_ALPHA_OPAQUE);
     
     for (Sint16 xColor = getXCenterPixel() - Sint16(_soft_w/2) ; xColor < getXCenterPixel() + Sint16(_soft_w/2) ; xColor++)
     {
         for (Sint16 yColor = getYCenterPixel() - Sint16(_soft_h/2) ; yColor < getYCenterPixel() + Sint16 (_soft_h/2); yColor ++)
         {
-            putPixel32_pbc(gScreen, xColor, yColor,  color);
+            putPixel32_pbc(gArena, xColor, yColor,  color);
         }
     }
     
@@ -166,7 +166,7 @@ void SquareObject::hide()
 	{
 		for (Sint16 yColor = getYCenterPixel() - Sint16(_solid_h/2) ; yColor < getYCenterPixel() + Sint16 (_solid_h/2); yColor ++)
 		{
-            putPixel32_pbc(gScreen, xColor, yColor,  color);
+            putPixel32_pbc(gArena, xColor, yColor,  color);
 		}
 	}
 }

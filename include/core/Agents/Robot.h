@@ -66,7 +66,7 @@ private:
 		//Moves the agent
 		void move( int __recursiveIt = 0 ) override;
 		
-		void show(SDL_Surface *surface = gScreen) override;
+		void show(SDL_Surface *surface = gArena) override;
 
     bool isCollision();
 

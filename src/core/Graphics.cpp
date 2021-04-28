@@ -165,7 +165,7 @@ void saveRenderScreenshot(const std::string &_comment) // parameter is optional
         screenShotIndexStr = "0" + screenShotIndexStr;
     }
 
-    saveImage(gScreen, "screenshot_render", screenShotIndexStr + "_" + _comment);
+    saveImage(gArena, "screenshot_render", screenShotIndexStr + "_" + _comment);
 
     gRenderScreenshotIndex++;
 }
@@ -184,7 +184,7 @@ void saveFullLoggerScreenshot(const std::string &_comment) // parameter is optio
         comment += "_" + _comment;
 
     if (gDisplayMode != 2)
-        saveImage(gScreen, "fullLogger_gScreen", screenShotIndexStr + comment);
+        saveImage(gArena, "fullLogger_gArena", screenShotIndexStr + comment);
 
     saveImage(gEnvironmentImage, "fullLogger_gEnvironmentImage", screenShotIndexStr + comment);
     saveImage(gFootprintImage, "fullLogger_gFootprintImage", screenShotIndexStr + comment);
@@ -327,40 +327,40 @@ bool initSDL(Uint32 flags) // parameter is optional (default: SDL_HWSURFACE | SD
 
     if ( !gBatchMode )
     {
-        gScreenWindow = SDL_CreateWindow("Roborobo^3",
+        gArenaWindow = SDL_CreateWindow("Roborobo^3",
                                      //SDL_WINDOWPOS_CENTERED,SDL_WINDOWPOS_CENTERED,
                                      SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-                                     gScreenDisplayWidth, gScreenDisplayHeight,
+                                     gDisplayScreenWidth, gDisplayScreenHeight,
                                      flags);
     }
 
-    gScreen = SDL_CreateRGBSurface(
+    gArena = SDL_CreateRGBSurface(
             0, // flags (unused)
-            gScreenWidth,
-            gScreenHeight,
+            gArenaWidth,
+            gArenaHeight,
             32,
             0x00FF0000,
             0x0000FF00,
             0x000000FF,
             0xFF000000);
 
-    if (gScreen == nullptr) // error?
+    if (gArena == nullptr) // error?
     {
-        std::cerr << "[CRITICAL] Failed to create screen surface (gScreen). Stop.\n";
+        std::cerr << "[CRITICAL] Failed to create screen surface (gArena). Stop.\n";
         return false;
     }
 
     gSnapshot = SDL_CreateRGBSurface(
             0, // flags (unused)
-            gScreenWidth,
-            gScreenHeight,
+            gArenaWidth,
+            gArenaHeight,
             32,
             0x00FF0000,
             0x0000FF00,
             0x000000FF,
             0xFF000000);
 
-    if (gScreen == nullptr) // error?
+    if (gArena == nullptr) // error?
     {
         std::cerr << "[CRITICAL] Failed to create snapshot surface (gSnapshot). Stop.\n";
         return false;
@@ -368,12 +368,12 @@ bool initSDL(Uint32 flags) // parameter is optional (default: SDL_HWSURFACE | SD
 
     if (!gBatchMode)
     {
-        gScreenRenderer = SDL_CreateRenderer(gScreenWindow, -1, SDL_RENDERER_ACCELERATED);
+        gArenaRenderer = SDL_CreateRenderer(gArenaWindow, -1, SDL_RENDERER_ACCELERATED);
 
-        gScreenTexture = SDL_CreateTexture(gScreenRenderer,
+        gArenaTexture = SDL_CreateTexture(gArenaRenderer,
                                            SDL_PIXELFORMAT_ARGB8888,
                                            SDL_TEXTUREACCESS_STREAMING,
-                                           gScreenWidth, gScreenHeight);
+                                           gArenaWidth, gArenaHeight);
     }
 
     return true;
@@ -500,7 +500,7 @@ void toggle_fullscreen()
 		exit(-2);
 	}
  
-	//if (SDL_WM_ToggleFullScreen(gScreen) == 0)
+	//if (SDL_WM_ToggleFullScreen(gArena) == 0)
 	*/
 }
 

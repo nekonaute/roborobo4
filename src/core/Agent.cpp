@@ -58,8 +58,8 @@ void Agent::move(int recursiveIt)
 void Agent::set_camera()
 {
     //Center the camera over the dot
-    gCamera.x = ( _x + gRobotWidth / 2 ) - gScreenWidth / 2;
-    gCamera.y = ( _y + gRobotHeight / 2 ) - gScreenHeight / 2;
+    gCamera.x = ( _x + gRobotWidth / 2 ) - gArenaWidth / 2;
+    gCamera.y = ( _y + gRobotHeight / 2 ) - gArenaHeight / 2;
     
     //Keep the camera in bounds.
     if( gCamera.x < 0 )        gCamera.x = 0;    

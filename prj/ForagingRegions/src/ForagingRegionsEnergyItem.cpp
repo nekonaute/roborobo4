@@ -83,8 +83,8 @@ void ForagingRegionsEnergyItem::relocate()
         //double gaussianPeakValue = 1.0 / std::sqrt( 2. * pi * std::pow(sigma,2) );
         //xPos = sigma*randgaussian() / gaussianPeakValue;
         
-        double x = xPos * ( gScreenWidth - 2*border ) + border;
-        double y = random01() * ( gScreenHeight - 2*border ) + border;
+        double x = xPos * ( gArenaWidth - 2*border ) + border;
+        double y = random01() * ( gArenaHeight - 2*border ) + border;
 
         setCoordinates(x, y, false);
         
