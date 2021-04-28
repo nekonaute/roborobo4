@@ -43,8 +43,6 @@ void saveImage(SDL_Surface *image, const std::string &prefix, const std::string 
 
 void saveCustomScreenshot(const std::string &_comment)
 {
-    //std::cout << "[DEBUG] saveCustomScreenshot: WORK IN PROGRESS!" << std::endl;
-
     // preparing
 
     std::string snapshotIndexStr = convertToString(gSnapshotIndex);
@@ -381,17 +379,34 @@ bool initSDL(Uint32 flags) // parameter is optional (default: SDL_HWSURFACE | SD
     return true;
 }
 
-void apply_surface( int x, int y, SDL_Surface* source, SDL_Surface* destination , SDL_Rect* clip ) // last argument is optional (cf. function header)
+void apply_surface( int _x, int _y, SDL_Surface* source, SDL_Surface* destination , SDL_Rect* clip ) // last argument is optional (cf. function header)
 {
-    //Holds offsets
+    // get offsets and blit
     SDL_Rect offset;
-    
-    //Get offsets
-    offset.x = x;
-    offset.y = y;
-    
-    //Blit
+    offset.x = _x;
+    offset.y = _y;
     SDL_BlitSurface( source, clip, destination, &offset );
+}
+
+// same as previous, but assume periodic boundary conditions (ie. toroidal world). Used to display robots, objects and landmarks. benchmarking 2021-04-24: same performance as previous function (using BlitSurface)
+void apply_surface_pbc( int _x, int _y, SDL_Surface* source, SDL_Surface* destination , SDL_Rect* clip ) // last argument is optional (cf. function header)
+{
+    for (int x = 0; x != source->w; x++)
+    {
+        for (int y = 0; y != source->h; y++) {
+            Uint32 pixel = getPixel32_pbc(source, x, y);
+
+
+            if (pixel != SDL_MapRGBA(destination->format, 0xFF, 0xFF, 0xFF, SDL_ALPHA_OPAQUE)) {
+                //Uint32 color = SDL_MapRGBA(destination->format, ((pixel & 0xFF0000) >> 16), ((pixel & 0xFF00) >> 8), (pixel & 0xFF), SDL_ALPHA_OPAQUE);  // loaded images follow SDL_PIXELFORMAT_ARGB8888
+                Uint32 r = (pixel & 0xFF0000) >> 16;
+                Uint32 g = (pixel & 0xFF00) >> 8;
+                Uint32 b = (pixel & 0xFF);
+                Uint32 color = SDL_MapRGBA(destination->format, r, g, b, SDL_ALPHA_OPAQUE);
+                putPixel32_pbc(destination, _x + x, _y + y, color);
+            }
+        }
+    }
 }
 
 void register_surface(int _x, int _y, SDL_Surface *source, SDL_Surface *destination,
@@ -435,7 +450,7 @@ void register_robotMask(int _x, int _y, SDL_Surface *destination,
     {
         int x = _x + gRobotMaskData[i][0];
         int y = _y + gRobotMaskData[i][1];
-        putPixel32(destination, x, y,
+        putPixel32_pbc(destination, x, y, // 2021-04-23
                    SDL_MapRGBA(destination->format, ((_id & 0xFF0000) >> 16), ((_id & 0xFF00) >> 8), (_id & 0xFF),
                                SDL_ALPHA_OPAQUE));
     }
@@ -453,7 +468,7 @@ void clean_robotMask(int _x, int _y, SDL_Surface *destination) // last argument 
 
         //std::cout << "coordinates: " << x << " , " << y << std::endl;
 
-        putPixel32(destination, x, y, SDL_MapRGBA(destination->format, 0xFF, 0xFF, 0xFF, SDL_ALPHA_OPAQUE));
+        putPixel32_pbc(destination, x, y, SDL_MapRGBA(destination->format, 0xFF, 0xFF, 0xFF, SDL_ALPHA_OPAQUE));
     }
 }
 
@@ -549,7 +564,7 @@ void drawLine(SDL_Surface * image,
     signed char const iy((delta_y > 0) - (delta_y < 0));
     delta_y = std::abs(delta_y) << 1;
     
-    putPixel32_secured( image, x1, y1 , color );
+    putPixel32_pbc( image, x1, y1 , color );
     
     if (delta_x >= delta_y)
     {
@@ -568,7 +583,7 @@ void drawLine(SDL_Surface * image,
             error += delta_y;
             x1 += ix;
             
-            putPixel32_secured( image, x1, y1 , color );
+            putPixel32_pbc( image, x1, y1 , color );
         }
     }
     else
@@ -588,7 +603,7 @@ void drawLine(SDL_Surface * image,
             error += delta_x;
             y1 += iy;
             
-            putPixel32_secured( image, x1, y1 , color );
+            putPixel32_pbc( image, x1, y1 , color );
         }
     }
 }
@@ -626,7 +641,7 @@ bool castLine(SDL_Surface * image,
 
     int dist = 0; // distance to obstacle (or to max_length)
 
-    if ( getPixel32( image, x1, y1 ) != colorDefault && getPixel32( image, x1, y1 ) != colorIgnore)
+    if ( getPixel32_pbc( image, x1, y1 ) != colorDefault && getPixel32_pbc( image, x1, y1 ) != colorIgnore)
     {
         *x2pt = x1;
         *y2pt = y1;
@@ -652,7 +667,7 @@ bool castLine(SDL_Surface * image,
 
             dist++;
 
-            if ( getPixel32( image, x1, y1 ) != colorDefault && getPixel32( image, x1, y1 ) != colorIgnore )
+            if ( getPixel32_pbc( image, x1, y1 ) != colorDefault && getPixel32_pbc( image, x1, y1 ) != colorIgnore )
             {
                 *x2pt = x1;
                 *y2pt = y1;
@@ -680,7 +695,7 @@ bool castLine(SDL_Surface * image,
 
             dist++;
 
-            if ( getPixel32( image, x1, y1 ) != colorDefault && getPixel32( image, x1, y1 ) != colorIgnore )
+            if ( getPixel32_pbc( image, x1, y1 ) != colorDefault && getPixel32_pbc( image, x1, y1 ) != colorIgnore )
             {
                 *x2pt = x1;
                 *y2pt = y1;

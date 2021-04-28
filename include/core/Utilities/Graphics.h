@@ -39,11 +39,44 @@ inline Uint32 getPixel32_secured( SDL_Surface *surface, int x, int y )
 		return -1;
 }
 
+inline Uint32 getPixel32_pbc( SDL_Surface *surface, int x, int y ) // pbc = periodic boundary conditions
+{
+    if ( x < 0 )
+    {
+        x = x + surface->w;
+        if (x < 0) // expected: one iteration
+        {
+            std::cout << "[ERROR] getpixel is looping over the screen.\n";
+            exit(-1);
+        }
+    }
+    else
+        if ( x >= surface->w )
+        {
+            x = x % surface->w; // expected: one iteration
+        }
+    if ( y < 0 )
+    {
+        y = y + surface->h;
+        if (y < 0) // expected: one iteration
+        {
+            std::cout << "[ERROR] getpixel is looping over the screen.\n";
+            exit(-1);
+        }
+    }
+    else
+        if ( y >= surface->h )
+        {
+            y = y % surface->h; // expected: one iteration
+        }
+    return getPixel32(surface, x, y);
+}
+
 inline void putPixel32( SDL_Surface *surface, int x, int y, Uint32 pixel )
 {
     //Convert the pixels to 32 bit
     Uint32 *pixels = (Uint32 *)surface->pixels;
-    
+
     //Set the pixel
     pixels[(y * (surface->w)) + x] = pixel;
 }
@@ -54,13 +87,46 @@ inline void putPixel32_secured(SDL_Surface *surface, int x, int y, Uint32 pixel)
         putPixel32(surface, x, y, pixel);
 }
 
+inline void putPixel32_pbc(SDL_Surface *surface, int x, int y, Uint32 pixel) // pbc = periodic boundary conditions
+{
+    if ( x < 0 )
+    {
+        x = x + surface->w;
+        if (x < 0) // expected: one iteration
+        {
+            std::cout << "[ERROR] putpixel is looping over the screen.\n";
+            exit(-1);
+        }
+    }
+    else
+        if ( x >= surface->w )
+        {
+            x = x % surface->w; // expected: one iteration
+        }
+    if ( y < 0 )
+    {
+        y = y + surface->h;
+        if (y < 0) // expected: one iteration
+        {
+            std::cout << "[ERROR] putpixel is looping over the screen.\n";
+            exit(-1);
+        }
+    }
+    else
+        if ( y >= surface->h )
+        {
+            y = y % surface->h; // expected: one iteration
+        }
+    putPixel32(surface, x, y, pixel);
+}
+
 void apply_surface(int x, int y, SDL_Surface *source, SDL_Surface *destination, SDL_Rect *clip = NULL);
+void apply_surface_pbc(int x, int y, SDL_Surface *source, SDL_Surface *destination, SDL_Rect *clip = NULL);
 
 void register_robotMask(int __x, int __y, SDL_Surface *destination, int __id); // use gRobotMaskData
 void clean_robotMask(int __x, int __y, SDL_Surface *destination); // use gRobotMaskData
 
-void
-register_surface(int __x, int __y, SDL_Surface *source, SDL_Surface *destination, int __id); // unused as of 2014-03-28
+void register_surface(int __x, int __y, SDL_Surface *source, SDL_Surface *destination, int __id); // unused as of 2014-03-28
 void clean_surface(int __x, int __y, SDL_Surface *source, SDL_Surface *destination); // unused as of 2014-03-28
 
 void toggle_fullscreen();

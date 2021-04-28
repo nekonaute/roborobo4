@@ -300,6 +300,12 @@ bool World::loadFiles()
         returnValue = false;
     }
 
+    if ( gEnvironmentImage->h != gScreenHeight || gEnvironmentImage->w != gScreenWidth )
+    {
+        std::cerr << "[ERROR] gScreenWidth=" << gScreenWidth <<" and gScreenHeight="<< gScreenHeight << " do not match Environment image dimensions (" << gEnvironmentImage->w << "," << gEnvironmentImage->h <<")\n";
+        returnValue = false;
+    }
+
     //gTrajectoryMonitorImage = load_image( gEnvironmentImageFilename ); // prepare for logging trajectories (useful if requested in the config file)   ---- // Created in roborobo::initTrajectoriesMonitor
 
     // load background image
@@ -315,32 +321,32 @@ bool World::loadFiles()
 
     if (gRobotMaskImage == nullptr)
     {
-        std::cerr << "Could not load agent mask image\n";
+        std::cerr << "[ERROR] Could not load agent mask image\n";
         returnValue = false;
     }
 
     if (gRobotDisplayImage == nullptr)
     {
-        std::cerr << "Could not load agent display image\n";
+        std::cerr << "[ERROR] Could not load agent display image\n";
         returnValue = false;
     }
 
     if (gRobotSpecsImage == nullptr)
     {
-        std::cerr << "Could not load agent specification image\n";
+        std::cerr << "[ERROR] Could not load agent specification image\n";
         returnValue = false;
     }
 
     //If there was a problem in loading the foreground image
     if (gForegroundImage == nullptr)
     {
-        std::cerr << "Could not load foreground image\n";
+        std::cerr << "[ERROR] Could not load foreground image\n";
         returnValue = false;
     }
 
     if (gEnvironmentImage == nullptr)
     {
-        std::cerr << "Could not load environment image\n";
+        std::cerr << "[ERROR] Could not load environment image\n";
         returnValue = false;
     }
 
@@ -348,13 +354,13 @@ bool World::loadFiles()
     //no background image (not a critical error)
     if (gBackgroundImage == nullptr)
     {
-        std::cout << "warning: could not load background image (will proceed anyway)\n";
+        std::cout << "[WARNING] could not load background image (will proceed anyway)\n";
     }
 
     // mandatory: image dimensions must be more than display screen dimensions (otw: underfitting)
     if (gForegroundImage->w < gScreenWidth || gForegroundImage->h < gScreenHeight)
     {
-        std::cerr << "foreground image dimensions must be " << gScreenWidth << "x" << gScreenHeight
+        std::cerr << "[ERROR] foreground image dimensions must be " << gScreenWidth << "x" << gScreenHeight
                   << " or higher (given: " << gForegroundImage->w << "x" << gForegroundImage->h << ") \n";
         returnValue = false;
     }
@@ -362,14 +368,14 @@ bool World::loadFiles()
     //If there was a problem in loading the ground type image
     if (gFootprintImage == nullptr)
     {
-        std::cerr << "Could not load ground image\n";
+        std::cerr << "[ERROR] Could not load ground image\n";
         returnValue = false;
     }
     else
     {
         if ((gFootprintImage->w != gForegroundImage->w) || (gFootprintImage->h != gForegroundImage->h))
         {
-            std::cerr << "Ground image dimensions do not match that of the foreground image\n";
+            std::cerr << "[ERROR] Ground image dimensions do not match that of the foreground image\n";
             returnValue = false;
         }
     }

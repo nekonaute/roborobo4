@@ -139,20 +139,20 @@ void InspectorAgent::show(SDL_Surface *surface) // display on screen
 	int dy = 4;
 
 	for ( int i = -2 ; i < +3 ; i++ )
-		putPixel32_secured( surface, x + i , y , SDL_MapRGBA( surface->format, r, g, b, SDL_ALPHA_OPAQUE ) );
+		putPixel32_pbc( surface, x + i , y , SDL_MapRGBA( surface->format, r, g, b, SDL_ALPHA_OPAQUE ) );
 	for ( int j = -2 ; j < +3 ; j++ )
-		putPixel32_secured( surface, x , y + j, SDL_MapRGBA( surface->format, r, g, b, SDL_ALPHA_OPAQUE ) );
+		putPixel32_pbc( surface, x , y + j, SDL_MapRGBA( surface->format, r, g, b, SDL_ALPHA_OPAQUE ) );
 
 	for ( int i = x - dx ; i != x + dx + 1 ; i++ )
 	{
-		putPixel32_secured( surface, i , y - dy , SDL_MapRGBA( surface->format, r, g, b, SDL_ALPHA_OPAQUE ) );
-		putPixel32_secured( surface, i, y + dy , SDL_MapRGBA( surface->format, r, g, b, SDL_ALPHA_OPAQUE ) );
+		putPixel32_pbc( surface, i , y - dy , SDL_MapRGBA( surface->format, r, g, b, SDL_ALPHA_OPAQUE ) );
+		putPixel32_pbc( surface, i, y + dy , SDL_MapRGBA( surface->format, r, g, b, SDL_ALPHA_OPAQUE ) );
 	}
 
 	for ( int j = y - dy ; j != y + dy + 1 ; j++ )
 	{
-		putPixel32_secured( surface, x - dx, j , SDL_MapRGBA( surface->format, r, g, b, SDL_ALPHA_OPAQUE ) );
-		putPixel32_secured( surface, x + dx, j , SDL_MapRGBA( surface->format, r, g, b, SDL_ALPHA_OPAQUE) );
+		putPixel32_pbc( surface, x - dx, j , SDL_MapRGBA( surface->format, r, g, b, SDL_ALPHA_OPAQUE ) );
+		putPixel32_pbc( surface, x + dx, j , SDL_MapRGBA( surface->format, r, g, b, SDL_ALPHA_OPAQUE) );
 	}
 }
 

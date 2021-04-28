@@ -7,6 +7,12 @@
 MovableObject::MovableObject( int __id ) : RoundObject( __id ) // should only be called by PhysicalObjectFactory
 {
     setType(4);
+
+    if ( gMovableObjects == false )
+    {
+        std::cout << "[ERROR] gMovableObjects property must be True to create a MovableObject\n";
+        exit(-1);
+    }
 }
 
 void MovableObject::step()
@@ -28,8 +34,6 @@ void MovableObject::step()
 
 void MovableObject::move()
 {
-    // work in progress - 2017-05-16
-    
     _hitWall = false;
     _didMove = false;
     _desiredX = _xReal;
@@ -83,14 +87,58 @@ void MovableObject::move()
         {
             unregisterObject();
             hide();
-            
+
             if (canRegister(newX, newY))
             {
                 _xReal = _desiredX;
                 _yReal = _desiredY;
                 _didMove = true;
             }
-            
+
+
+            // Check for periodic boundary conditions (ie. ensure coodinates are within bounds) [new feature: 2021-04-23]
+            if ( _xReal < 0 )
+            {
+                _xReal = _xReal + gScreenHeight;
+                if (_xReal < 0) // expected: one iteration
+                {
+                    std::cout << "[ERROR] MovableObject is moving too fast.\n";
+                    exit(-1);
+                }
+            }
+            else {
+                if (_xReal >= gScreenWidth) {
+                    _xReal = _xReal - gScreenWidth;
+                    if (_xReal >= gScreenWidth) // expected: one iteration
+                    {
+                        std::cout << "[ERROR] MovableObject is moving too fast.\n";
+                        exit(-1);
+                    }
+
+                }
+            }
+            if ( _yReal < 0 )
+            {
+                _yReal = _yReal + gScreenHeight;
+                if (_yReal < 0) // expected: one iteration
+                {
+                    std::cout << "[ERROR] MovableObject is moving too fast.\n";
+                    exit(-1);
+                }
+            }
+            else {
+                if ( _yReal >= gScreenHeight )
+                {
+                    _yReal = _yReal - gScreenHeight;
+                    if (_yReal >= gScreenHeight) // expected: one iteration
+                    {
+                        std::cout << "[ERROR] MovableObject is moving too fast.\n";
+                        exit(-1);
+                    }
+                }
+            }
+
+
             //if (_hitWall )  // trigger relocation if object hits wall -- deprecated as of 31/07/2017
             //{
             //    registered = false;
@@ -107,6 +155,7 @@ void MovableObject::move()
         
         _impulses.clear();
     }
+
 }
 
 bool MovableObject::canRegister()
@@ -123,7 +172,7 @@ bool MovableObject::canRegister( Sint16 __x, Sint16 __y )
         {
             if ( pow (xColor-__x,2) + pow (yColor - __y,2) < _radius*_radius )
             {
-                Uint32 pixel = getPixel32_secured( gEnvironmentImage, xColor, yColor);
+                Uint32 pixel = getPixel32_pbc( gEnvironmentImage, xColor, yColor);
                 if ( pixel != SDL_MapRGBA( gEnvironmentImage->format, 0xFF, 0xFF, 0xFF, SDL_ALPHA_OPAQUE ) ) {
                     // if we touched an object, tell it
                     Uint8 r, g, b;

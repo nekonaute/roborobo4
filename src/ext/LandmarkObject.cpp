@@ -85,7 +85,7 @@ void LandmarkObject::show(SDL_Surface *surface) // display on screen (called in 
         {
             if ((sqrt ( pow (xColor-_xCenterPixel,2) + pow (yColor - _yCenterPixel,2))) < _radius)
             {
-                putPixel32(surface, xColor, yColor,  color);//color);
+                putPixel32_pbc(surface, xColor, yColor,  color);
             }
         }
     }
@@ -105,7 +105,7 @@ void LandmarkObject::hide()
         {
             if ((sqrt ( pow (xColor-_xCenterPixel,2) + pow (yColor - _yCenterPixel,2))) < _radius)
             {
-                putPixel32(gScreen, xColor, yColor, color);
+                putPixel32_pbc(gScreen, xColor, yColor, color);
             }
         }
     }

@@ -111,7 +111,7 @@ void CircleObject::show(SDL_Surface *surface) // display on screen (called in th
         {
             if ((sqrt ( pow (xColor-getXCenterPixel(),2) + pow (yColor - getYCenterPixel(),2))) < _footprintRadius)
             {
-                putPixel32_secured(surface, xColor, yColor,  color);
+                putPixel32_pbc(surface, xColor, yColor,  color);
             }
         }
     }
@@ -126,7 +126,7 @@ void CircleObject::show(SDL_Surface *surface) // display on screen (called in th
 		{
 			if ((sqrt ( pow (xColor-getXCenterPixel(),2) + pow (yColor - getYCenterPixel(),2))) < _radius)
 			{
-                putPixel32_secured(surface, xColor, yColor,  color);
+                putPixel32_pbc(surface, xColor, yColor,  color);
 			}
 		}
 	}
@@ -148,7 +148,7 @@ void CircleObject::hide()
         {
             if ((sqrt ( pow (xColor-getXCenterPixel(),2) + pow (yColor - getYCenterPixel(),2))) < _footprintRadius)
             {
-                putPixel32_secured(gScreen, xColor, yColor,  color);
+                putPixel32_pbc(gScreen, xColor, yColor,  color);
             }
         }
     }
@@ -161,7 +161,7 @@ void CircleObject::hide()
 		{
 			if ((sqrt ( pow (xColor-getXCenterPixel(),2) + pow (yColor - getYCenterPixel(),2))) < _radius)
 			{
-                putPixel32_secured(gScreen, xColor, yColor,  color);
+                putPixel32_pbc(gScreen, xColor, yColor,  color);
 			}
 		}
 	}
@@ -176,7 +176,7 @@ bool CircleObject::canRegister()
         {
             if ((sqrt ( pow (xColor-getXCenterPixel(),2) + pow (yColor - getYCenterPixel(),2))) < _radius)
             {
-                Uint32 pixel = getPixel32_secured( gEnvironmentImage, xColor, yColor);
+                Uint32 pixel = getPixel32_pbc( gEnvironmentImage, xColor, yColor);
                 if ( pixel != SDL_MapRGBA( gEnvironmentImage->format, 0xFF, 0xFF, 0xFF, SDL_ALPHA_OPAQUE ) )
                     return false; // collision!
             }
@@ -190,11 +190,11 @@ bool CircleObject::canRegister()
         {
             if ((sqrt ( pow (xColor-getXCenterPixel(),2) + pow (yColor - getYCenterPixel(),2))) < _footprintRadius)
             {
-                Uint32 pixelFootprint = getPixel32_secured( gFootprintImage, xColor, yColor);
-                Uint32 pixelEnvironment = getPixel32_secured( gEnvironmentImage, xColor, yColor);
+                Uint32 pixelFootprint = getPixel32_pbc( gFootprintImage, xColor, yColor);
+                Uint32 pixelEnvironment = getPixel32_pbc( gEnvironmentImage, xColor, yColor);
                 if (
                         pixelEnvironment != SDL_MapRGBA( gEnvironmentImage->format, 0xFF, 0xFF, 0xFF, SDL_ALPHA_OPAQUE ) ||
-                        ( gFootprintImage_restoreOriginal == true  && pixelFootprint != getPixel32_secured( gFootprintImageBackup, xColor, yColor ) ) || // case: ground as initialized or rewritten (i.e. white)
+                        ( gFootprintImage_restoreOriginal == true  && pixelFootprint != getPixel32_pbc( gFootprintImageBackup, xColor, yColor ) ) || // case: ground as initialized or rewritten (i.e. white)
                         ( gFootprintImage_restoreOriginal == false && pixelFootprint != SDL_MapRGBA( gFootprintImage->format, 0xFF, 0xFF, 0xFF, SDL_ALPHA_OPAQUE ) ) // case: only white ground
                    )
                     return false; // collision!
@@ -222,7 +222,7 @@ void CircleObject::registerObject()
         {
             if ((sqrt ( pow (xColor-getXCenterPixel(),2) + pow (yColor - getYCenterPixel(),2))) < _footprintRadius)
             {
-                putPixel32_secured(gFootprintImage, xColor, yColor,  color);
+                putPixel32_pbc(gFootprintImage, xColor, yColor,  color);
             }
         }
     }
@@ -237,7 +237,7 @@ void CircleObject::registerObject()
         {
             if ((sqrt ( pow (xColor-getXCenterPixel(),2) + pow (yColor - getYCenterPixel(),2))) < _radius)
             {
-                putPixel32_secured(gEnvironmentImage, xColor, yColor,  color);//color);
+                putPixel32_pbc(gEnvironmentImage, xColor, yColor,  color);//color);
             }
         }
     }
@@ -258,11 +258,11 @@ void CircleObject::unregisterObject()
             {
                 if ( gFootprintImage_restoreOriginal == true )
                 {
-                    color = getPixel32_secured( gFootprintImageBackup, xColor, yColor);
-                    putPixel32_secured(gFootprintImage, xColor, yColor,  color);
+                    color = getPixel32_pbc( gFootprintImageBackup, xColor, yColor);
+                    putPixel32_pbc(gFootprintImage, xColor, yColor,  color);
                 }
                 else
-                    putPixel32_secured(gFootprintImage, xColor, yColor,  color);
+                    putPixel32_pbc(gFootprintImage, xColor, yColor,  color);
             }
         }
     }
@@ -277,7 +277,7 @@ void CircleObject::unregisterObject()
         {
             if ((sqrt ( pow (xColor-getXCenterPixel(),2) + pow (yColor - getYCenterPixel(),2))) < _radius)
             {
-                putPixel32_secured(gEnvironmentImage, xColor, yColor,  color);//color);
+                putPixel32_pbc(gEnvironmentImage, xColor, yColor,  color);//color);
             }
         }
     }
