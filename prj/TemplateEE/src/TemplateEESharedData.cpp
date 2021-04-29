@@ -14,8 +14,6 @@ double TemplateEESharedData::gSigmaRef = 0.0; // reference value of sigma
 double TemplateEESharedData::gSigmaMax = 0.0; // maximal value of sigma
 int TemplateEESharedData::gEvaluationTime = 0; // how long a controller will be evaluated on a robot
 
-bool TemplateEESharedData::gSynchronization = true;
-
 bool TemplateEESharedData::gEnergyRequestOutput = 1;
 
 double TemplateEESharedData::gMonitorPositions;

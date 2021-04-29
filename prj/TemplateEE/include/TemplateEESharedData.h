@@ -25,8 +25,7 @@ public:
     static double gProbaMutation; //! probability of transmitting the current genome mutated with sigma ref
     static int gEvaluationTime; //! theoretical duration of a generation (ie. maximum time a controller will be evaluated on a robot)
     static int gIteration; //! used by every class to know what is the current iteration step of roborobo
-    static bool gSynchronization; //!If set to false, a robot will restart its controller as soon as it has no more energy. If set to true, the robot without energy will wait and reload its controller at the same time as every other robots.
-    
+
     static bool gEnergyRequestOutput; // does the robot can modulate its energy request (when being given some) ?
     
     static double gMonitorPositions; //! used in WorldObserver. Compute and log all necessary information for monitoring position and orientation wrt. center.
