@@ -125,12 +125,16 @@ Robot::~Robot()
 void Robot::reset()
 {
     //Initialize general
-	_iterations = 0;
+
+    _iterations = 0;
 	_wm->setAlive(true);
 
-	int x = 0 , y = 0;
+    int x = 0 , y = 0;
 
-	std::stringstream out;
+    bool randomPick = true;
+    int tries = 0; // max number of trials: gLocationFinderMaxNbOfTrials
+
+    std::stringstream out;
 	out << _wm->getId();
 
     std::string str_groupId = "";
@@ -154,44 +158,80 @@ void Robot::reset()
         _wm->setGroupId(0);
     }
     
-	std::string str_Xcoord = "";
-	str_Xcoord += "robot[";
-	str_Xcoord += out.str();
-	str_Xcoord += "].x";
 
-	std::string str_Ycoord = "";
-	str_Ycoord = "robot[";
-	str_Ycoord += out.str();
-	str_Ycoord += "].y";
-    
-    int tries = 0; // max number of trials: gLocationFinderMaxNbOfTrials
-    bool randomPick = true;
-
-	if ( gProperties.hasProperty( str_Xcoord ) == true && gProperties.hasProperty( str_Ycoord ) == true )
-	{
-		convertFromString<int>(x, gProperties.getProperty( str_Xcoord ), std::dec);
-		convertFromString<int>(y, gProperties.getProperty( str_Ycoord ), std::dec);
-        randomPick = false;
-	}
-	else
-	{
-	    std::pair<int, int> new_pos;
-	    try
-        {
-            new_pos = findRandomLocation(gLocationFinderMaxNbOfTrials);
-        }
-	    catch (std::runtime_error& err)
-        {
-            std::cerr << "[CRITICAL] Random initialization of initial position for agent #" << _wm->getId() << " after trying " << gLocationFinderMaxNbOfTrials << " random picks (all failed). There may be too few (none?) possible locations (you may try to manually set initial positions). EXITING.\n";
-            std::cerr << err.what() << "\n";
-            exit(-1);
-        }
-	    x = new_pos.first;
-	    y = new_pos.second;
+    bool gRobotRegisterAtInit = true;
+    if ( gProperties.hasProperty( "gRobotRegisterAtInit" ) == true )
+    {
+        gProperties.checkAndGetPropertyValue("gRobotRegisterAtInit", &gRobotRegisterAtInit, false);
     }
 
-	setCoordReal(x,y);
-    setCoord(x,y);
+    if ( gRobotRegisterAtInit )
+    {
+        // * set position
+
+        std::string str_Xcoord = "";
+        str_Xcoord += "robot[";
+        str_Xcoord += out.str();
+        str_Xcoord += "].x";
+
+        std::string str_Ycoord = "";
+        str_Ycoord = "robot[";
+        str_Ycoord += out.str();
+        str_Ycoord += "].y";
+
+        if ( gProperties.hasProperty( str_Xcoord ) == true && gProperties.hasProperty( str_Ycoord ) == true )
+        {
+            convertFromString<int>(x, gProperties.getProperty( str_Xcoord ), std::dec);
+            convertFromString<int>(y, gProperties.getProperty( str_Ycoord ), std::dec);
+            randomPick = false;
+        }
+        else
+        {
+            std::pair<int, int> new_pos;
+            try
+            {
+                new_pos = findRandomLocation(gLocationFinderMaxNbOfTrials);
+            }
+            catch (std::runtime_error& err)
+            {
+                std::cerr << "[CRITICAL] Random initialization of initial position for agent #" << _wm->getId() << " after trying " << gLocationFinderMaxNbOfTrials << " random picks (all failed). There may be too few (none?) possible locations (you may try to manually set initial positions). EXITING.\n";
+                std::cerr << err.what() << "\n";
+                exit(-1);
+            }
+            x = new_pos.first;
+            y = new_pos.second;
+        }
+
+        setCoordReal(x,y);
+        setCoord(x,y);
+
+        // * set orientation
+
+        //bool randomOrientation = false;
+
+        std::string str_orient = "";
+        str_orient = "robot[";
+        str_orient += out.str();
+        str_orient += "].orientation";
+        if ( gProperties.hasProperty( str_orient ) )
+        {
+            convertFromString<double>(_wm->_agentAbsoluteOrientation, gProperties.getProperty( str_orient ), std::dec);
+        }
+        else
+        {
+            _wm->_agentAbsoluteOrientation = random01() * 360. - 180.;
+            //randomOrientation = true;
+        }
+    }
+    else
+    {
+        // note: gRobotRegisterAtInit=false is typically used in pyRoborobo, to manualy position the robot at start-up
+        x = gAreaWidth/2;
+        y = gAreaHeight/2;
+        setCoordReal(x,y);
+        setCoord(x,y);
+        _wm->_agentAbsoluteOrientation = random01() * 360. - 180.;
+    }
 
     //Initialize coordinate and displacement
 	_xDelta = 0;
@@ -200,45 +240,32 @@ void Robot::reset()
 	//Initialize internal variables
 	_xDeltaReal=0;
 	_yDeltaReal=0;
-		
-    // * set orientation
-    
-    //bool randomOrientation = false;
-    
-	std::string str_orient = "";
-	str_orient = "robot[";
-	str_orient += out.str();
-	str_orient += "].orientation";
-	if ( gProperties.hasProperty( str_orient ) )
-    {
-		convertFromString<double>(_wm->_agentAbsoluteOrientation, gProperties.getProperty( str_orient ), std::dec);
-    }
-	else
-	{
-		_wm->_agentAbsoluteOrientation = random01() * 360. - 180.;
-        //randomOrientation = true;
-	}
-    
+
     // display results
     
     if ( gVerbose )
     {
-        
-        std::cout << "[INFO] Robot #" << _wm->getId() << " positioned at ( "<< std::setw(5) << x << " , " << std::setw(5) << y << " ) with orientation " << std::setw(8) << _wm->_agentAbsoluteOrientation << "° -- ";
-        
-        if ( randomPick == false )
-            std::cout << "[user-defined position]\n";
+        if ( gRobotRegisterAtInit == true )
+        {
+            std::cout << "[INFO] Robot #" << _wm->getId() << " positioned at ( "<< std::setw(5) << x << " , " << std::setw(5) << y << " ) with orientation " << std::setw(8) << _wm->_agentAbsoluteOrientation << "° -- ";
+
+            if ( randomPick == false )
+                std::cout << "[user-defined position]\n";
+            else
+            {
+                std::cout << "[random pick after " << tries;
+                if ( tries <= 1 )
+                    std::cout << " try]\n";
+                else
+                    std::cout << " tries]\n";
+            }
+        }
         else
         {
-            std::cout << "[random pick after " << tries;
-            if ( tries <= 1 )
-                std::cout << " try]\n";
-            else
-                std::cout << " tries]\n";
-            
+            std::cout << "[INFO] Robot #" << _wm->getId() << " created. Re-locating is required, orientation is random." << std::endl;
         }
     }
-    
+
     // set other parameters
 	
 	_wm->_agentAbsoluteLinearSpeed = 0;
@@ -247,7 +274,7 @@ void Robot::reset()
 	_wm->_desiredTranslationalValue = 0;
 	
 	_wm->_maxRotationalDeltaValue = gMaxRotationalSpeed; // ie. change will be instantenous
-	_wm->_maxTranslationalDeltaValue = gMaxTranslationalDeltaValue; // idem.
+	_wm->_maxTranslationalDeltaValue = gMaxTranslationalDeltaValue;
 	
 	_wm->_actualTranslationalValue = 0;
 	_wm->_actualRotationalVelocity = 0;
