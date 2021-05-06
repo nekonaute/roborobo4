@@ -327,7 +327,7 @@ bool initSDL(Uint32 flags) // parameter is optional (default: SDL_HWSURFACE | SD
 
     if ( !gBatchMode )
     {
-        gArenaWindow = SDL_CreateWindow("Roborobo^3",
+        gArenaWindow = SDL_CreateWindow("Roborobo",
                                      //SDL_WINDOWPOS_CENTERED,SDL_WINDOWPOS_CENTERED,
                                      SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
                                      gDisplayScreenWidth, gDisplayScreenHeight,

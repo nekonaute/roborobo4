@@ -262,7 +262,7 @@ void Robot::reset()
         }
         else
         {
-            std::cout << "[INFO] Robot #" << _wm->getId() << " created. Re-locating is required, orientation is random." << std::endl;
+            std::cout << "[INFO] Robot #" << _wm->getId() << " created." << std::endl;
         }
     }
 
@@ -614,7 +614,7 @@ void Robot::move( int __recursiveIt ) // the interface btw agent and world -- in
 	
 	
 	// * update x/y position
-		
+
 	_xDeltaReal = _wm->_agentAbsoluteLinearSpeed * cos(_wm->_agentAbsoluteOrientation * M_PI / 180);
 	_yDeltaReal = _wm->_agentAbsoluteLinearSpeed * sin(_wm->_agentAbsoluteOrientation * M_PI / 180);
 
@@ -927,18 +927,27 @@ void Robot::show(SDL_Surface *surface) // display on screen
         
         int xOrientationMarkerSource =  (int)(_wm->_xReal);
         int yOrientationMarkerSource =  (int)(_wm->_yReal);
-        
-        int xOrientationMarkerTarget =  (int)(_wm->_xReal) + gTailLength * cos(( _wm->_agentAbsoluteOrientation + 180 ) * M_PI / 180);
-        int yOrientationMarkerTarget =  (int)(_wm->_yReal) + gTailLength * sin(( _wm->_agentAbsoluteOrientation + 180 ) * M_PI / 180);
-        
+
         int r,g,b;
         g = b = (32*_iterations%256) > 128 ? 0 : 255 ;
         r = 0;
-        
-        // show orientation (multicolor) - this is done by adding a *virtual* tail *behind* the robot
-        for ( int xTmp = -1 ; xTmp < 2 ; xTmp+=2 )
-            for ( int yTmp = -1 ; yTmp < 2 ; yTmp+=2 )
-                traceRayRGB(surface, (int)(_wm->_xReal+(double)xTmp)  - gCamera.x, (int)(_wm->_yReal+(double)yTmp) - gCamera.y, xOrientationMarkerTarget - gCamera.x, yOrientationMarkerTarget - gCamera.y, r , g , b );
+
+        // show orientation (multicolor) - ARROW - this is done by adding a *virtual* arrow *in front of* the robot
+        int xOrientationMarkerTarget =  (int)(_wm->_xReal) - gTailLength * cos(( _wm->_agentAbsoluteOrientation + 180 ) * M_PI / 180);
+        int yOrientationMarkerTarget =  (int)(_wm->_yReal) - gTailLength * sin(( _wm->_agentAbsoluteOrientation + 180 ) * M_PI / 180);
+        traceRayRGB(surface, (int)(_wm->_xReal)  - gCamera.x, (int)(_wm->_yReal) - gCamera.y, xOrientationMarkerTarget - gCamera.x, yOrientationMarkerTarget - gCamera.y, r, g, b );
+        int xArrow = (int)(_wm->_xReal) - gTailLength*0.80 * cos(( _wm->_agentAbsoluteOrientation + 170 ) * M_PI / 180);;
+        int yArrow = (int)(_wm->_yReal) - gTailLength*0.80 * sin(( _wm->_agentAbsoluteOrientation + 170 ) * M_PI / 180);
+        traceRayRGB(surface, xOrientationMarkerTarget - gCamera.x, yOrientationMarkerTarget - gCamera.y, xArrow - gCamera.x, yArrow - gCamera.y, r, g, b );
+        xArrow = (int)(_wm->_xReal) - gTailLength*0.80 * cos(( _wm->_agentAbsoluteOrientation + 190 ) * M_PI / 180);;
+        yArrow = (int)(_wm->_yReal) - gTailLength*0.80 * sin(( _wm->_agentAbsoluteOrientation + 190 ) * M_PI / 180);
+        traceRayRGB(surface, xOrientationMarkerTarget - gCamera.x, yOrientationMarkerTarget - gCamera.y, xArrow - gCamera.x, yArrow - gCamera.y, r, g, b );
+        // show orientation (multicolor) - TAIL - this is done by adding a *virtual* tail *behind* the robot
+        //int xOrientationMarkerTarget =  (int)(_wm->_xReal) + gTailLength * cos(( _wm->_agentAbsoluteOrientation + 180 ) * M_PI / 180);
+        //int yOrientationMarkerTarget =  (int)(_wm->_yReal) + gTailLength * sin(( _wm->_agentAbsoluteOrientation + 180 ) * M_PI / 180);
+        //for ( int xTmp = -1 ; xTmp < 2 ; xTmp+=2 )
+        //    for ( int yTmp = -1 ; yTmp < 2 ; yTmp+=2 )
+        //        traceRayRGB(surface, (int)(_wm->_xReal+(double)xTmp)  - gCamera.x, (int)(_wm->_yReal+(double)yTmp) - gCamera.y, xOrientationMarkerTarget - gCamera.x, yOrientationMarkerTarget - gCamera.y, r , g , b );
         
         // show position (multicolor)
         for ( int xTmp = -2 ; xTmp != 3 ; xTmp++ )
@@ -951,12 +960,25 @@ void Robot::show(SDL_Surface *surface) // display on screen
         // * show orientation - this is done by adding a *virtual* tail *behind* the robot
         if ( gDisplayTail && gNiceRendering )
         {
+            // show orientation - ARROW - this is done by adding a *virtual* arrow *in front of* the robot
+            int xOrientationMarkerTarget =  (int)(_wm->_xReal) - gTailLength * cos(( _wm->_agentAbsoluteOrientation + 180 ) * M_PI / 180);
+            int yOrientationMarkerTarget =  (int)(_wm->_yReal) - gTailLength * sin(( _wm->_agentAbsoluteOrientation + 180 ) * M_PI / 180);
+            traceRayRGB(surface, (int)(_wm->_xReal)  - gCamera.x, (int)(_wm->_yReal) - gCamera.y, xOrientationMarkerTarget - gCamera.x, yOrientationMarkerTarget - gCamera.y, 90, 113, 148 ); // 255 , 128 , 0
+            int xArrow = (int)(_wm->_xReal) - gTailLength*0.80 * cos(( _wm->_agentAbsoluteOrientation + 170 ) * M_PI / 180);;
+            int yArrow = (int)(_wm->_yReal) - gTailLength*0.80 * sin(( _wm->_agentAbsoluteOrientation + 170 ) * M_PI / 180);
+            traceRayRGB(surface, xOrientationMarkerTarget - gCamera.x, yOrientationMarkerTarget - gCamera.y, xArrow - gCamera.x, yArrow - gCamera.y, 90, 113, 148 ); // 255 , 128 , 0
+            xArrow = (int)(_wm->_xReal) - gTailLength*0.80 * cos(( _wm->_agentAbsoluteOrientation + 190 ) * M_PI / 180);;
+            yArrow = (int)(_wm->_yReal) - gTailLength*0.80 * sin(( _wm->_agentAbsoluteOrientation + 190 ) * M_PI / 180);
+            traceRayRGB(surface, xOrientationMarkerTarget - gCamera.x, yOrientationMarkerTarget - gCamera.y, xArrow - gCamera.x, yArrow - gCamera.y, 90, 113, 148 ); // 255 , 128 , 0
+            /*
+            // show orientation - TAIL - this is done by adding a *virtual* tail *behind* the robot
             int xOrientationMarkerTarget =  (int)(_wm->_xReal) + gTailLength * cos(( _wm->_agentAbsoluteOrientation + 180 ) * M_PI / 180);
             int yOrientationMarkerTarget =  (int)(_wm->_yReal) + gTailLength * sin(( _wm->_agentAbsoluteOrientation + 180 ) * M_PI / 180);
 
             for ( int xTmp = -1 ; xTmp < 2 ; xTmp+=2 )
                 for ( int yTmp = -1 ; yTmp < 2 ; yTmp+=2 )
                     traceRayRGB(surface, (int)(_wm->_xReal+(double)xTmp)  - gCamera.x, (int)(_wm->_yReal+(double)yTmp) - gCamera.y, xOrientationMarkerTarget - gCamera.x, yOrientationMarkerTarget - gCamera.y, 90, 113, 148 ); // 255 , 128 , 0
+            */
         }
         
     }

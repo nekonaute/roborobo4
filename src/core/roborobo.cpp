@@ -97,7 +97,7 @@ std::string gCurrentBuildInfo = "Shangri-La build (roborobo^4 w/ python interfac
 // Lutetia build -- sept 2015 -- roborobo^3 (major revision: switch to SDL2)
 // Tokyo build -- jan 2016 -- roborobo^3 (rev 1, public release on github)
 // Kyoto build -- april 2018 -- roborobo^3 (rev 2, many improvements and fixes)
-// Shangri-La build -- march 2021 -- roborobo^4 (major revision: pyRoborobo, the python interface to Roborobo)
+// Shangri-La build -- march 2021 -- roborobo^4 (major revision: added pyRoborobo, the python interface to Roborobo)
 
 ExtendedProperties gProperties;
 
@@ -1784,7 +1784,7 @@ bool loadProperties(const std::string &_propertiesFilename)
         }
         else
         {
-            std::cerr << "[WARNING] gLocationFinderExitOnFail is missing or corrupt (default is \"true\").\n";
+            std::cerr << "[WARNING] gLocationFinderExitOnFail is missing or mispelled (default is \"true\").\n";
             //returnValue = false; // not critical
         }
     }
@@ -1802,7 +1802,7 @@ bool loadProperties(const std::string &_propertiesFilename)
         }
         else
         {
-            std::cerr << "[WARNING] gRobotDisplayFocus is missing or corrupt (default is \"false\").\n";
+            std::cerr << "[WARNING] gRobotDisplayFocus is missing or mispelled (default is \"false\").\n";
             //returnValue = false; // not critical
         }
     }
@@ -1845,7 +1845,7 @@ bool loadProperties(const std::string &_propertiesFilename)
         }
         else
         {
-            std::cerr << "[WARNING] gTrajectoryMonitor is missing or corrupt (default is \"false\").\n";
+            std::cerr << "[WARNING] gTrajectoryMonitor is missing or mispelled (default is \"false\").\n";
             //returnValue = false;
         }
     }
@@ -1863,7 +1863,7 @@ bool loadProperties(const std::string &_propertiesFilename)
         }
         else
         {
-            std::cerr << "[WARNING] gVideoRecording is missing or corrupt (default is \"false\").\n";
+            std::cerr << "[WARNING] gVideoRecording is missing or mispelled (default is \"false\").\n";
             //returnValue = false;
         }
     }
@@ -2145,7 +2145,7 @@ bool loadProperties(const std::string &_propertiesFilename)
         }
         else
         {
-            std::cerr << "[WARNING] gCustomSnapshot_niceRendering is missing or corrupt (default value is \""
+            std::cerr << "[WARNING] gCustomSnapshot_niceRendering is missing or mispelled (default value is \""
                       << gCustomSnapshot_niceRendering << "\").\n";
             //returnValue = false;
         }
@@ -2164,7 +2164,7 @@ bool loadProperties(const std::string &_propertiesFilename)
         }
         else
         {
-            std::cerr << "[WARNING] gCustomSnapshot_showLandmarks is missing or corrupt (default value is \""
+            std::cerr << "[WARNING] gCustomSnapshot_showLandmarks is missing or mispelled (default value is \""
                       << gCustomSnapshot_showLandmarks << "\").\n";
             //returnValue = false;
         }
@@ -2183,7 +2183,7 @@ bool loadProperties(const std::string &_propertiesFilename)
         }
         else
         {
-            std::cerr << "[WARNING] gCustomSnapshot_showObjects is missing or corrupt (default value is \""
+            std::cerr << "[WARNING] gCustomSnapshot_showObjects is missing or mispelled (default value is \""
                       << gCustomSnapshot_showObjects << "\").\n";
             //returnValue = false;
         }
@@ -2202,7 +2202,7 @@ bool loadProperties(const std::string &_propertiesFilename)
         }
         else
         {
-            std::cerr << "[WARNING] gCustomSnapshot_showRobots is missing or corrupt (default value is \""
+            std::cerr << "[WARNING] gCustomSnapshot_showRobots is missing or mispelled (default value is \""
                       << gCustomSnapshot_showRobots << "\").\n";
             //returnValue = false;
         }
@@ -2221,7 +2221,7 @@ bool loadProperties(const std::string &_propertiesFilename)
         }
         else
         {
-            std::cerr << "[WARNING] gCustomSnapshot_showSensorRays is missing or corrupt (default value is \""
+            std::cerr << "[WARNING] gCustomSnapshot_showSensorRays is missing or mispelled (default value is \""
                       << gCustomSnapshot_showSensorRays << "\").\n";
             //returnValue = false;
         }
@@ -2240,7 +2240,7 @@ bool loadProperties(const std::string &_propertiesFilename)
         }
         else
         {
-            std::cerr << "[WARNING] gMovableObjects is missing or corrupt (default is \"" << gMovableObjects
+            std::cerr << "[WARNING] gMovableObjects is missing or mispelled (default is \"" << gMovableObjects
                       << "\").\n";
             //returnValue = false;
         }
