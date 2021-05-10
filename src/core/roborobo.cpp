@@ -944,20 +944,20 @@ void updateDisplay() // display is called starting when gWorld->getIterations > 
         if (gWorld->getIterations() == 1)
         {
             saveCustomScreenshot("firstIteration");
-            saveRenderScreenshot("firstIteration");
+            //saveRenderScreenshot("firstIteration");
             saveFullLoggerScreenshot("firstIteration");
-            saveEnvironmentScreenshot("firstIteration");
-            saveFootprintScreenshot("firstIteration");
+            //saveEnvironmentScreenshot("firstIteration");
+            //saveFootprintScreenshot("firstIteration");
         }
         else
         {
             if (gWorld->getIterations() == gMaxIt - 1)
             {
                 saveCustomScreenshot("lastIteration");
-                saveRenderScreenshot("lastIteration");
+                //saveRenderScreenshot("lastIteration");
                 saveFullLoggerScreenshot("lastIteration");
-                saveEnvironmentScreenshot("lastIteration");
-                saveFootprintScreenshot("lastIteration");
+                //saveEnvironmentScreenshot("lastIteration");
+                //saveFootprintScreenshot("lastIteration");
             }
         }
 

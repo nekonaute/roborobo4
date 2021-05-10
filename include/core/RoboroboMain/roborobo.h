@@ -59,6 +59,7 @@ extern std::string gLogFullFilename;
 
 extern std::ofstream gLogFile;
 extern LogManager *gLogManager;
+extern bool gLogScreenshots;
 
 extern std::string gRobotMaskImageFilename;
 extern std::string gRobotDisplayImageFilename;
