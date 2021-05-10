@@ -258,7 +258,7 @@ float gMaxTranslationalSpeed = 2; // pixels/sec.
 float gMaxTranslationalDeltaValue = gMaxTranslationalSpeed; // maximum delta update value btw current and desired speed.
 float gMaxRotationalSpeed = 30; // degrees/sec.
 int gSensorRange = 64;
-int gTailLength = 16;
+int gArrowLength = 16;
 
 int gInspectorCursorMaxSpeedOnXaxis = 5; // "god" inspector mode max speed on both axis ("G" key to activate)
 int gInspectorCursorMaxSpeedOnYaxis = 10;
@@ -948,7 +948,6 @@ void updateDisplay() // display is called starting when gWorld->getIterations > 
             saveFullLoggerScreenshot("firstIteration");
             saveEnvironmentScreenshot("firstIteration");
             saveFootprintScreenshot("firstIteration");
-
         }
         else
         {
@@ -1061,7 +1060,7 @@ void initLogging()
     gLogFile << "# LOG DATA " << std::endl;
     gLogFile << "# =-=-=-=-=-=-=-=-=-=-=" << std::endl;
     gLogFile << "#" << std::endl;
-    gLogFile << "# =-= Roborobo^3 " << std::endl;
+    gLogFile << "# =-= Roborobo^4 " << std::endl;
     gLogFile << "# =-= Official version tag    : " << gVersion << std::endl;
     gLogFile << "# =-= Current build name      : " << gCurrentBuildInfo << std::endl;
     gLogFile << "# =-= Compilation version tag : " << gCompileDate << " - " << gCompileTime << std::endl;
@@ -1744,13 +1743,13 @@ bool loadProperties(const std::string &_propertiesFilename)
         returnValue = false;
     }
 
-    if (gProperties.hasProperty("gTailLength"))
+    if (gProperties.hasProperty("gArrowLength"))
     {
-        convertFromString<int>(gTailLength, gProperties.getProperty("gTailLength"), std::dec);
+        convertFromString<int>(gArrowLength, gProperties.getProperty("gArrowLength"), std::dec);
     }
     else
     {
-        std::cerr << "[MISSING] gTailLength value is missing. Assume default value (" << gTailLength << ").\n";
+        std::cerr << "[MISSING] gArrowLength value is missing. Assume default value (" << gArrowLength << ").\n";
     }
 
     if (gProperties.hasProperty("gDisplaySensors"))
@@ -2384,7 +2383,7 @@ bool loadProperties(const std::string &_propertiesFilename)
     out << "# PROPERTIES FILE DUMP " << std::endl;
     out << "# =-=-=-=-=-=-=-=-=-=-=" << std::endl;
     out << "#" << std::endl;
-    out << "# =-= Roborobo^3 " << std::endl;
+    out << "# =-= Roborobo^4 " << std::endl;
     out << "# =-= Official version tag    : " << gVersion << std::endl;
     out << "# =-= Current build name      : " << gCurrentBuildInfo << std::endl;
     out << "# =-= Compilation version tag : " << gCompileDate << " - " << gCompileTime << std::endl;

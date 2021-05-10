@@ -256,7 +256,7 @@ extern float gMaxTranslationalSpeed; // pixels/sec.
 extern float gMaxTranslationalDeltaValue; // default: = gMaxTranslationSpeed (however, may favor bang-bang)
 extern float gMaxRotationalSpeed; // degrees/sec.
 extern int gSensorRange;
-extern int gTailLength;
+extern int gArrowLength;
 
 extern int gLocomotionMode; // locomotion mode dynamics
 							// =0: friction is ok. Robot crashes but can still rotate - ie. rotate while crash (no obstacle friction)

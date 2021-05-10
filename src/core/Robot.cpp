@@ -933,18 +933,19 @@ void Robot::show(SDL_Surface *surface) // display on screen
         r = 0;
 
         // show orientation (multicolor) - ARROW - this is done by adding a *virtual* arrow *in front of* the robot
-        int xOrientationMarkerTarget =  (int)(_wm->_xReal) - gTailLength * cos(( _wm->_agentAbsoluteOrientation + 180 ) * M_PI / 180);
-        int yOrientationMarkerTarget =  (int)(_wm->_yReal) - gTailLength * sin(( _wm->_agentAbsoluteOrientation + 180 ) * M_PI / 180);
+        int arrowLength = gArrowLength/2 + gArrowLength/2 * _wm->_desiredTranslationalValue/_wm->_maxTranslationalDeltaValue;
+        int xOrientationMarkerTarget =  (int)(_wm->_xReal) - arrowLength * cos(( _wm->_agentAbsoluteOrientation + 180 ) * M_PI / 180);
+        int yOrientationMarkerTarget =  (int)(_wm->_yReal) - arrowLength * sin(( _wm->_agentAbsoluteOrientation + 180 ) * M_PI / 180);
         traceRayRGB(surface, (int)(_wm->_xReal)  - gCamera.x, (int)(_wm->_yReal) - gCamera.y, xOrientationMarkerTarget - gCamera.x, yOrientationMarkerTarget - gCamera.y, r, g, b );
-        int xArrow = (int)(_wm->_xReal) - gTailLength*0.80 * cos(( _wm->_agentAbsoluteOrientation + 170 ) * M_PI / 180);;
-        int yArrow = (int)(_wm->_yReal) - gTailLength*0.80 * sin(( _wm->_agentAbsoluteOrientation + 170 ) * M_PI / 180);
+        int xArrow = (int)(_wm->_xReal) - arrowLength*0.80 * cos(( _wm->_agentAbsoluteOrientation + 170 ) * M_PI / 180);;
+        int yArrow = (int)(_wm->_yReal) - arrowLength*0.80 * sin(( _wm->_agentAbsoluteOrientation + 170 ) * M_PI / 180);
         traceRayRGB(surface, xOrientationMarkerTarget - gCamera.x, yOrientationMarkerTarget - gCamera.y, xArrow - gCamera.x, yArrow - gCamera.y, r, g, b );
-        xArrow = (int)(_wm->_xReal) - gTailLength*0.80 * cos(( _wm->_agentAbsoluteOrientation + 190 ) * M_PI / 180);;
-        yArrow = (int)(_wm->_yReal) - gTailLength*0.80 * sin(( _wm->_agentAbsoluteOrientation + 190 ) * M_PI / 180);
+        xArrow = (int)(_wm->_xReal) - arrowLength*0.80 * cos(( _wm->_agentAbsoluteOrientation + 190 ) * M_PI / 180);;
+        yArrow = (int)(_wm->_yReal) - arrowLength*0.80 * sin(( _wm->_agentAbsoluteOrientation + 190 ) * M_PI / 180);
         traceRayRGB(surface, xOrientationMarkerTarget - gCamera.x, yOrientationMarkerTarget - gCamera.y, xArrow - gCamera.x, yArrow - gCamera.y, r, g, b );
         // show orientation (multicolor) - TAIL - this is done by adding a *virtual* tail *behind* the robot
-        //int xOrientationMarkerTarget =  (int)(_wm->_xReal) + gTailLength * cos(( _wm->_agentAbsoluteOrientation + 180 ) * M_PI / 180);
-        //int yOrientationMarkerTarget =  (int)(_wm->_yReal) + gTailLength * sin(( _wm->_agentAbsoluteOrientation + 180 ) * M_PI / 180);
+        //int xOrientationMarkerTarget =  (int)(_wm->_xReal) + gArrowLength * cos(( _wm->_agentAbsoluteOrientation + 180 ) * M_PI / 180);
+        //int yOrientationMarkerTarget =  (int)(_wm->_yReal) + gArrowLength * sin(( _wm->_agentAbsoluteOrientation + 180 ) * M_PI / 180);
         //for ( int xTmp = -1 ; xTmp < 2 ; xTmp+=2 )
         //    for ( int yTmp = -1 ; yTmp < 2 ; yTmp+=2 )
         //        traceRayRGB(surface, (int)(_wm->_xReal+(double)xTmp)  - gCamera.x, (int)(_wm->_yReal+(double)yTmp) - gCamera.y, xOrientationMarkerTarget - gCamera.x, yOrientationMarkerTarget - gCamera.y, r , g , b );
@@ -961,19 +962,20 @@ void Robot::show(SDL_Surface *surface) // display on screen
         if ( gDisplayTail && gNiceRendering )
         {
             // show orientation - ARROW - this is done by adding a *virtual* arrow *in front of* the robot
-            int xOrientationMarkerTarget =  (int)(_wm->_xReal) - gTailLength * cos(( _wm->_agentAbsoluteOrientation + 180 ) * M_PI / 180);
-            int yOrientationMarkerTarget =  (int)(_wm->_yReal) - gTailLength * sin(( _wm->_agentAbsoluteOrientation + 180 ) * M_PI / 180);
+            int arrowLength = gArrowLength/2 + gArrowLength/2 * _wm->_desiredTranslationalValue/_wm->_maxTranslationalDeltaValue;
+            int xOrientationMarkerTarget =  (int)(_wm->_xReal) - arrowLength * cos(( _wm->_agentAbsoluteOrientation + 180 ) * M_PI / 180);
+            int yOrientationMarkerTarget =  (int)(_wm->_yReal) - arrowLength * sin(( _wm->_agentAbsoluteOrientation + 180 ) * M_PI / 180);
             traceRayRGB(surface, (int)(_wm->_xReal)  - gCamera.x, (int)(_wm->_yReal) - gCamera.y, xOrientationMarkerTarget - gCamera.x, yOrientationMarkerTarget - gCamera.y, 90, 113, 148 ); // 255 , 128 , 0
-            int xArrow = (int)(_wm->_xReal) - gTailLength*0.80 * cos(( _wm->_agentAbsoluteOrientation + 170 ) * M_PI / 180);;
-            int yArrow = (int)(_wm->_yReal) - gTailLength*0.80 * sin(( _wm->_agentAbsoluteOrientation + 170 ) * M_PI / 180);
+            int xArrow = (int)(_wm->_xReal) - arrowLength*0.80 * cos(( _wm->_agentAbsoluteOrientation + 170 ) * M_PI / 180);;
+            int yArrow = (int)(_wm->_yReal) - arrowLength*0.80 * sin(( _wm->_agentAbsoluteOrientation + 170 ) * M_PI / 180);
             traceRayRGB(surface, xOrientationMarkerTarget - gCamera.x, yOrientationMarkerTarget - gCamera.y, xArrow - gCamera.x, yArrow - gCamera.y, 90, 113, 148 ); // 255 , 128 , 0
-            xArrow = (int)(_wm->_xReal) - gTailLength*0.80 * cos(( _wm->_agentAbsoluteOrientation + 190 ) * M_PI / 180);;
-            yArrow = (int)(_wm->_yReal) - gTailLength*0.80 * sin(( _wm->_agentAbsoluteOrientation + 190 ) * M_PI / 180);
+            xArrow = (int)(_wm->_xReal) - arrowLength*0.80 * cos(( _wm->_agentAbsoluteOrientation + 190 ) * M_PI / 180);;
+            yArrow = (int)(_wm->_yReal) - arrowLength*0.80 * sin(( _wm->_agentAbsoluteOrientation + 190 ) * M_PI / 180);
             traceRayRGB(surface, xOrientationMarkerTarget - gCamera.x, yOrientationMarkerTarget - gCamera.y, xArrow - gCamera.x, yArrow - gCamera.y, 90, 113, 148 ); // 255 , 128 , 0
             /*
             // show orientation - TAIL - this is done by adding a *virtual* tail *behind* the robot
-            int xOrientationMarkerTarget =  (int)(_wm->_xReal) + gTailLength * cos(( _wm->_agentAbsoluteOrientation + 180 ) * M_PI / 180);
-            int yOrientationMarkerTarget =  (int)(_wm->_yReal) + gTailLength * sin(( _wm->_agentAbsoluteOrientation + 180 ) * M_PI / 180);
+            int xOrientationMarkerTarget =  (int)(_wm->_xReal) + gArrowLength * cos(( _wm->_agentAbsoluteOrientation + 180 ) * M_PI / 180);
+            int yOrientationMarkerTarget =  (int)(_wm->_yReal) + gArrowLength * sin(( _wm->_agentAbsoluteOrientation + 180 ) * M_PI / 180);
 
             for ( int xTmp = -1 ; xTmp < 2 ; xTmp+=2 )
                 for ( int yTmp = -1 ; yTmp < 2 ; yTmp+=2 )
