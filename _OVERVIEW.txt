@@ -8,7 +8,7 @@
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-What is the current version and target build? Launch "roborobo -v" in the console.
+Current version and target build? Launch "roborobo -v" in the console.
 
 Check _FAQ.TXT for trouble shooting.
 Check build/sphinx/html/index.html for python interface.
