@@ -92,7 +92,7 @@ Compile and install Roborobo:
 ```bash
 # conda activate roborobo (if not already activated)
 cd roborobo4
-python setup.py install --force
+python setup.py install --force --user
 ```
 
 Check the QUICK START section below for running a Roborobo example.
