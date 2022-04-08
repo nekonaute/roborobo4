@@ -230,6 +230,12 @@ Roborobo (C++) examples can be found in the <your_roborobo_folder>/prj directory
  * Check _OVERVIEW.TXT for a __quick introduction__.
  * Check _FAQ.TXT for __trouble shooting__ and __frequently asked questions__.
  * Check the examples, and learn by doing.
+
+## Troubleshooting
+
+ * As of 2022-04-08, Sphinx is not compatible with Python 3.10. Fix: use an earlier version of python for compilation and running examples.
+ * _conda activate roborobo_ may require to init a shell before, which is done with _git init bash_. This may fail if your bash profile has been badly written. Fix: clean your bash profile, or use another shell (e.g. _tcsh_)
+
 ___
 
 _Thank you for using Roborobo!_
