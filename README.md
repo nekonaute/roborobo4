@@ -167,7 +167,7 @@ Compile and install Roborobo (if not done already):
 ```bash
 cd <your_roborobo_folder>
 # python setup.py clean --all -- only if want to rebuild all from scratch
-python setup.py install --force 
+python setup.py install --force --user
 ```
 
 Run a pyRoborobo example:
@@ -179,7 +179,7 @@ python tutorial.py
 
 Many other examples are available in the __pyRoborobo_dev/examples__ folder.
 
-## Build the pyRoborobo API documentation
+## Build the pyRoborobo API documentation (optional)
 
 Build Roborobo's python API documentation:
 ```bash
@@ -190,7 +190,7 @@ python setup.py build_sphinx
 The pyRoborobo API documentation is now in _build/sphinx/html/index.html_
 
 
-## Running a C++ example
+## Running a C++ example (optional)
 
 If you installed Roborobo for the first time, setup the directory structure for running Roborobo: 
 
@@ -212,8 +212,8 @@ conda activate roborobo
 Compile and install Roborobo (to be done everytime you modify the C++ code:
 ```bash
 cd <your_roborobo_folder>
-# python setup.py clean --all -- only if want to rebuild all from scratch
-python setup.py install --force 
+# python setup.py clean --all --user _only if want to rebuild all from scratch_
+python setup.py install --force --user
 ```
 
 Run a roborobo example:
