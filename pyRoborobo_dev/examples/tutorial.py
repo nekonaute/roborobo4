@@ -22,9 +22,9 @@ class TutorialController(Controller):
         camera_dist = self.get_all_distances()
         if (camera_dist[1] < 1  # if we see something on our right
                 or camera_dist[2] < 1):  # or in front of us
-            self.set_rotation(1)  # turn left
+            self.set_rotation(1)  # turn right
         elif camera_dist[3] < 1:  # Otherwise, if we see something on our left
-            self.set_rotation(-1)  # turn right
+            self.set_rotation(-1)  # turn left
         # now let's get talkative
         if self.id == 0:
             print(f"I am {self}, {self.id}, at position {self.absolute_position} and orientation {self.absolute_orientation}")
