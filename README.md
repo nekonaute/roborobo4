@@ -237,7 +237,7 @@ Roborobo (C++) examples are in the <your_roborobo_folder>/prj directory. Note th
 
 ## Troubleshooting
 
- * Problem with Sphinx (used for generating the documentation, problem may occur in version 3.10 and later as of 2022-04-08)
+ * Problem with Sphinx (used for generating the documentation, problem may occur in version 3.10 and later as of 2022-04-08, still valid on 2024-01-21)
    * easy fix (recommended): remove reference to Sphinx in setup.py (l.7 and l.64)
    * easy fix (: use a version of Python earlier than 3.10 
  * problem with missing MESA/GLX: apt-get install -y mesa-utils libgl1-mesa-glx
