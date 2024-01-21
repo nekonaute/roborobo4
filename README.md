@@ -1,7 +1,7 @@
 # Roborobo.4
 
 
-**Roborobo** is a fast and simple 2D mobile robot simulator loosely based on low-cost mobile robots such as khepera or epuck models. It is targeted for fast single and multi-robots simulation for evolutionary robotics and machine learning in multi-agent systems, collective and swarm robotics .
+**Roborobo** is a fast and simple 2D mobile robot simulator loosely based on low-cost mobile robots such as khepera or epuck models. It is targeted for fast single and multi-robots simulation for evolutionary robotics and machine learning in multi-agent systems, collective and swarm robotics.
 
 **Roborobo** combines speed of development _and_ speed of execution. Roborobo can be programmed with python 3.x, with all the core functions written in C++ for super fast execution.
 
@@ -16,7 +16,7 @@ Roborobo version 4 is currently the __only__ supported version. Current official
 __Main contributors__
 
  * Nicolas Bredeche: main roborobo developper and project initiator (since 2009)
- * http://pages.isir.upmc.fr/~bredeche/
+ * [http://pages.isir.upmc.fr/~bredeche/](https://www.isir.upmc.fr/personnel/bredeche/?lang=en)
  * contact: nicolas.bredeche(at)sorbonne-universite.fr
 
  * Paul Ecoffet: pyRoborobo, the python interface to Roborobo (2020-2021)
@@ -92,7 +92,8 @@ Compile and install Roborobo:
 ```bash
 # conda activate roborobo (if not already activated)
 cd roborobo4
-python setup.py install --force --user
+# deprecated: python setup.py install --force --user
+python3 -m pip install . --force --user -v
 ```
 
 Check the QUICK START section below for running a Roborobo example.
@@ -140,7 +141,8 @@ Compile and install Roborobo:
 ```bash
 # conda activate roborobo (if not already activated)
 cd roborobo4
-python setup.py install --force
+# deprecated: python setup.py install --force --user
+python3 -m pip install . --force --user -v
 ```
 
 Check the QUICK START section below for running a Roborobo example.
@@ -167,7 +169,8 @@ Compile and install Roborobo (if not done already):
 ```bash
 cd <your_roborobo_folder>
 # python setup.py clean --all -- only if want to rebuild all from scratch
-python setup.py install --force --user
+# deprecated: python setup.py install --force --user
+python3 -m pip install . --force --user -v
 ```
 
 Run a pyRoborobo example:
@@ -209,11 +212,12 @@ Activate conda environment (if not done already):
 conda activate roborobo
 ```
 
-Compile and install Roborobo (to be done everytime you modify the C++ code:
+Compile and install Roborobo (to be done every time you modify the C++ code:
 ```bash
 cd <your_roborobo_folder>
 # python setup.py clean --all --user _only if want to rebuild all from scratch_
-python setup.py install --force --user
+# deprecated: python setup.py install --force --user
+python3 -m pip install . --force --user -v
 ```
 
 Run a roborobo example:
@@ -223,7 +227,7 @@ cd <your_roborobo_folder>/build
 ./roborobo -l config/Tutorial.properties
 ```
 
-Roborobo (C++) examples can be found in the <your_roborobo_folder>/prj directory. Note that project selection is achieved from the configuration file (config/filename.properties)
+Roborobo (C++) examples are in the <your_roborobo_folder>/prj directory. Note that project selection is achieved from the configuration file (config/filename.properties)
 
 ## What next?
 
@@ -233,8 +237,19 @@ Roborobo (C++) examples can be found in the <your_roborobo_folder>/prj directory
 
 ## Troubleshooting
 
- * As of 2022-04-08, Sphinx is not compatible with Python 3.10. Fix: use an earlier version of python for compilation and running examples.
+ * Problem with Sphinx (used for generating the documentation, problem may occur in version 3.10 and later as of 2022-04-08)
+   * easy fix (recommended): remove reference to Sphinx in setup.py (l.7 and l.64)
+   * easy fix (: use a version of Python earlier than 3.10 
+ * problem with missing MESA/GLX: apt-get install -y mesa-utils libgl1-mesa-glx
+ * problem when running tutorial.py (or any other examples):
+	 * error looks like: ImportError: /lib/x86_64-linux-gnu/libwayland-client.so.0: undefined symbol: ffi_type_uint32, version LIBFFI_BASE_7.0
+	 * fix looks like: solution: export LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libffi.so.7
+ * in some cases conda may use a different python version than the default one. To force conda to use a specific version of Python: conda create (...) python==3.9
  * _conda activate roborobo_ may require to init a shell before, which is done with _conda init bash_. This may fail if your bash profile has been badly written. Fix: clean your bash profile, or use another shell (e.g. run _tcsh_ before the command _conda activate roborobo_)
+ * Error: "setup.py install is deprecated."
+	 * Contrary to what the message says, setup.py isn't deprecated but can no longer be used directly.
+	 * Solution: python3 -m pip install . --force --user -v
+	 * Comment: it can be pretty long. Be sure to use the -v option for verbose mode.
 
 ___
 
