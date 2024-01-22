@@ -261,8 +261,7 @@ Roborobo (C++) examples are in the <your_roborobo_folder>/prj directory. Note th
 	 * You tried to run setup.py. Contrary to what the message says, setup.py isn't deprecated but can no longer be used directly.
 	 * Solution (see above): python3 -m pip install . --force --user -v
 	 * Comment: it can be pretty long. Be sure to use the -v option for verbose mode.
- * When executing _tutorial.py_ (or any other examples):
- * When executing _python3 tutorial.py_
+ * When executing _python3 tutorial.py_ (or any other examples)
 	 * error: "no module name 'pyRoborobo'"
   	 * first, be sure to check that you followed every step of the installation tutorial. If this is the case, then try the following.
   	 * Solution 1: be sure that you have activated the conda environment (prefix of prompt should read something like _(roborobo)_)
