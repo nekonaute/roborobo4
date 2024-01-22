@@ -242,6 +242,7 @@ Roborobo (C++) examples are in the <your_roborobo_folder>/prj directory. Note th
 		* for Python in Conda: _conda list | grep python_
 		* for Python in Terminal: _python3 --version_
 	* To force conda to use a specific version of Python: conda create (...) python==3.9
+ 	* Update conda to the latest version if needed.   
  * When executing _conda activate roborobo_
         * error: the shell (e.g. bash) is not configured.
 	* solution 1: _conda init bash_. This may fail if your bash profile has been badly written. Fix: clean your bash profile
