@@ -241,7 +241,7 @@ Roborobo (C++) examples are in the <your_roborobo_folder>/prj directory. Note th
  	* To check which versions are used:
 		* for Python in Conda: _conda list | grep python_
 		* for Python in Terminal: _python3 --version_
-	* To force conda to use a specific version of Python: conda create (...) python==3.9
+	* To force conda to use a specific version of Python: _conda create (...) python==3.12_
  	* Update conda to the latest version if needed.   
  * When executing _conda activate roborobo_
         * error: the shell (e.g. bash) is not configured.
@@ -256,7 +256,7 @@ Roborobo (C++) examples are in the <your_roborobo_folder>/prj directory. Note th
          * easy fix (not recommended): switch to a different version of Python (e.g. away from 3.10) 
  * When executing _python3 -m pip install . --force --user -v_
 	 * error: problem with missing MESA/GLX
-         * solution (see above): apt-get install -y mesa-utils libgl1-mesa-glx
+	 * solution (see above): apt-get install -y mesa-utils libgl1-mesa-glx
  * When executing _python setup.py install --force --use -v_
 	 * error: "setup.py install is deprecated." (this should not happen if you follow the tutorial)
 	 * You tried to run setup.py. Contrary to what the message says, setup.py isn't deprecated but can no longer be used directly.
