@@ -237,19 +237,25 @@ Roborobo (C++) examples are in the <your_roborobo_folder>/prj directory. Note th
 
 ## Troubleshooting
 
- * error: "setup.py install is deprecated." (this should not happen if you follow the tutorial)
-	 * You probably tried to run setup.py. Contrary to what the message says, setup.py isn't deprecated but can no longer be used directly.
-	 * Solution: python3 -m pip install . --force --user -v
+ * When executing _python setup.py install --force --use -v_
+	 * error: "setup.py install is deprecated." (this should not happen if you follow the tutorial)
+	 * You tried to run setup.py. Contrary to what the message says, setup.py isn't deprecated but can no longer be used directly.
+	 * Solution (see above): python3 -m pip install . --force --user -v
 	 * Comment: it can be pretty long. Be sure to use the -v option for verbose mode.
- * python3 -m pip install . --force --user -v
+ * When executing _python3 -m pip install . --force --user -v_
 	 * => error during execution "could NOT find SDL2" (hidden somewhere in the very long list of messages)
 	 * system install of SDL2 (must be super user). See apt commands above.
- *  
- * error referring to Sphinx when compiling (Sphinx is used for generating the documentation, problem may occur in version 3.10 and later as of 2022-04-08, still valid on 2024-01-21)
-   * easy fix (recommended): remove reference to Sphinx in setup.py (l.7 and l.64)
-   * easy fix (not recommended): use a version of Python earlier than 3.10 
+ * When executing _python3 tutorial.py_
+         * error: "no module name 'pyRoborobo'"
+	 * comment: Conda's Python and default Python command uses different versions. Check with _conda list | grep python_ and _python --version_
+   	 * e.g.: conda uses python3.7, it must be be 3.12
+   	 * Solution: use same version (i.e.: update Conda, or use specific Python version in command line)
+ * When executing _python3 -m pip install . --force --user -v_
+ 	 * error referring to Sphinx (Sphinx is used for generating the documentation)
+         * easy fix (recommended): remove reference to Sphinx in setup.py (l.7 and l.64)
+         * easy fix (not recommended): switch to different version of Python (e.g. away from 3.10) 
  * problem with missing MESA/GLX: apt-get install -y mesa-utils libgl1-mesa-glx
- * problem when running tutorial.py (or any other examples):
+ * When executing tutorial.py (or any other examples):
 	 * error looks like: ImportError: /lib/x86_64-linux-gnu/libwayland-client.so.0: undefined symbol: ffi_type_uint32, version LIBFFI_BASE_7.0
 	 * fix looks like: solution: export LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libffi.so.7
  * in some cases conda may use a different python version than the default one. To force conda to use a specific version of Python: conda create (...) python==3.9
