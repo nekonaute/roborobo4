@@ -241,6 +241,10 @@ Roborobo (C++) examples are in the <your_roborobo_folder>/prj directory. Note th
 	 * You probably tried to run setup.py. Contrary to what the message says, setup.py isn't deprecated but can no longer be used directly.
 	 * Solution: python3 -m pip install . --force --user -v
 	 * Comment: it can be pretty long. Be sure to use the -v option for verbose mode.
+ * python3 -m pip install . --force --user -v
+	 * => error during execution "could NOT find SDL2" (hidden somewhere in the very long list of messages)
+	 * system install of SDL2 (must be super user). See apt commands above.
+ *  
  * error referring to Sphinx when compiling (Sphinx is used for generating the documentation, problem may occur in version 3.10 and later as of 2022-04-08, still valid on 2024-01-21)
    * easy fix (recommended): remove reference to Sphinx in setup.py (l.7 and l.64)
    * easy fix (not recommended): use a version of Python earlier than 3.10 
