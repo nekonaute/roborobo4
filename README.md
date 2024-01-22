@@ -262,13 +262,12 @@ Roborobo (C++) examples are in the <your_roborobo_folder>/prj directory. Note th
 	 * Solution (see above): python3 -m pip install . --force --user -v
 	 * Comment: it can be pretty long. Be sure to use the -v option for verbose mode.
  * When executing _tutorial.py_ (or any other examples):
- 	* error looks like: ModuleNotFoundError: No module named 'pyroborobo'
-  	* be sure to check that you followed every steps of the installation tutorial. If this is the case, then it may be a problem with multiple Python versions. Conda used one version, and Python command in shell calls for another version.
-   	* fix: use _bash_ (not tcsh), add to the end of the .bashrc file: _alias python='/usr/bin/python3.xx'_ with _xx_ the preferred version. Restart terminal after modification.
  * When executing _python3 tutorial.py_
 	 * error: "no module name 'pyRoborobo'"
-   	 * Solution 1: be sure that you have activated the conda environment (prefix of prompt should read something like _(roborobo)_)
-   	 * Solution 2: if previous solution failed, this may me a more tricky problem. Use same python version (i.e.: update Conda, or use specific Python version in command line). Comment: Conda's Python and default Python command uses different versions. Check with _conda list | grep python_ and _python --version_. e.g.: conda uses python3.7, it must be be 3.12
+  	 * first, be sure to check that you followed every step of the installation tutorial. If this is the case, then try the following.
+  	 * Solution 1: be sure that you have activated the conda environment (prefix of prompt should read something like _(roborobo)_)
+   	 * Solution 2: this may be a tricky problem of mismatch Python versions from Conda and command-line. Use same python versions (i.e.: update Conda, or use specific Python version in command line). Comment: Conda's Python and default Python command uses different versions. Check with _conda list | grep python_ and _python --version_. They should be the same.
+   	 * Solution 3: use _bash_ (not _tcsh_), add to the end of the .bashrc file: _alias python='/usr/bin/python3.xx'_ with _xx_ the preferred version. Restart terminal after modification.
  * When executing _python tutorial.py_ (or any other examples)
 	 * error looks like: ImportError: /lib/x86_64-linux-gnu/libwayland-client.so.0: undefined symbol: ffi_type_uint32, version LIBFFI_BASE_7.0
 	 * fix looks like: solution: export LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libffi.so.7
