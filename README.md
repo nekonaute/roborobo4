@@ -237,7 +237,7 @@ Roborobo (C++) examples are in the <your_roborobo_folder>/prj directory. Note th
 
 ## Troubleshooting
 
- * First, be sure that conda uses the same Python version than the default one used in the terminal.
+ * First, be sure that conda uses the same Python version as the default one used in the terminal.
  	* To check which versions are used:
 		* for Python in Conda: _conda list | grep python_
 		* for Python in Terminal: _python3 --version_
@@ -246,7 +246,7 @@ Roborobo (C++) examples are in the <your_roborobo_folder>/prj directory. Note th
         * error: the shell (e.g. bash) is not configured.
 	* solution 1: _conda init bash_. This may fail if your bash profile has been badly written. Fix: clean your bash profile
    	* solution 2: use another shell (e.g. run _tcsh_, to be used before the command _conda activate roborobo_)
- * problem with running tutorial.py (or any other examples):
+ * When executing _tutorial.py_ (or any other examples):
  	* error looks like: ModuleNotFoundError: No module named 'pyroborobo'
   	* be sure to check that you followed every steps of the installation tutorial. If this is the case, then it may be a problem with multiple Python versions. Conda used one version, and Python command in shell calls for another version.
    	* fix: use _bash_ (not tcsh), add to the end of the .bashrc file: _alias python='/usr/bin/python3.xx'_ with _xx_ the preferred version. Restart terminal after modification.
