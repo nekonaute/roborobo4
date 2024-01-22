@@ -264,8 +264,7 @@ Roborobo (C++) examples are in the <your_roborobo_folder>/prj directory. Note th
  	* error looks like: ModuleNotFoundError: No module named 'pyroborobo'
   	* be sure to check that you followed every steps of the installation tutorial. If this is the case, then it may be a problem with multiple Python versions. Conda used one version, and Python command in shell calls for another version.
    	* fix: use _bash_ (not tcsh), add to the end of the .bashrc file: _alias python='/usr/bin/python3.xx'_ with _xx_ the preferred version. Restart terminal after modification.
- * As of Fall 2023, Mac M1 does not seem to be supported (though it may work using a Linux virtual machine).
-
+ * As of Fall 2023, Mac M1 does not seem to be able to run Roborobo (though it may work using a Linux virtual machine). You may use Virtualbox to install a Linux OS but this is still in beta as of early 2024. See dedicated [topic on virtualbox forum](https://forums.virtualbox.org/viewtopic.php?f=8&t=107344)
 ___
 
 _Thank you for using Roborobo!_
