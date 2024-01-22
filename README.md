@@ -246,10 +246,6 @@ Roborobo (C++) examples are in the <your_roborobo_folder>/prj directory. Note th
         * error: the shell (e.g. bash) is not configured.
 	* solution 1: _conda init bash_. This may fail if your bash profile has been badly written. Fix: clean your bash profile
    	* solution 2: use another shell (e.g. run _tcsh_, to be used before the command _conda activate roborobo_)
- * When executing _tutorial.py_ (or any other examples):
- 	* error looks like: ModuleNotFoundError: No module named 'pyroborobo'
-  	* be sure to check that you followed every steps of the installation tutorial. If this is the case, then it may be a problem with multiple Python versions. Conda used one version, and Python command in shell calls for another version.
-   	* fix: use _bash_ (not tcsh), add to the end of the .bashrc file: _alias python='/usr/bin/python3.xx'_ with _xx_ the preferred version. Restart terminal after modification.
  * When executing _python3 -m pip install . --force --user -v_
 	 * => error during execution "could NOT find SDL2" (hidden somewhere in the very long list of messages)
 	 * system install of SDL2 (must be super user). See apt commands above.
@@ -265,6 +261,10 @@ Roborobo (C++) examples are in the <your_roborobo_folder>/prj directory. Note th
 	 * You tried to run setup.py. Contrary to what the message says, setup.py isn't deprecated but can no longer be used directly.
 	 * Solution (see above): python3 -m pip install . --force --user -v
 	 * Comment: it can be pretty long. Be sure to use the -v option for verbose mode.
+ * When executing _tutorial.py_ (or any other examples):
+ 	* error looks like: ModuleNotFoundError: No module named 'pyroborobo'
+  	* be sure to check that you followed every steps of the installation tutorial. If this is the case, then it may be a problem with multiple Python versions. Conda used one version, and Python command in shell calls for another version.
+   	* fix: use _bash_ (not tcsh), add to the end of the .bashrc file: _alias python='/usr/bin/python3.xx'_ with _xx_ the preferred version. Restart terminal after modification.
  * When executing _python3 tutorial.py_
 	 * error: "no module name 'pyRoborobo'"
    	 * Solution 1: be sure that you have activated the conda environment (prefix of prompt should read something like _(roborobo)_)
