@@ -255,7 +255,7 @@ Roborobo (C++) examples are in the <your_roborobo_folder>/prj directory. Note th
          * easy fix (recommended): remove reference to Sphinx in setup.py (delete line 7 and remove _'build_sphinx': BuildDoc_ from line 64)
          * easy fix (not recommended): switch to a different version of Python (e.g. away from 3.10) 
  * When executing _python3 -m pip install . --force --user -v_
-         * error: problem with missing MESA/GLX
+	 * error: problem with missing MESA/GLX
          * solution (see above): apt-get install -y mesa-utils libgl1-mesa-glx
  * When executing _python setup.py install --force --use -v_
 	 * error: "setup.py install is deprecated." (this should not happen if you follow the tutorial)
@@ -263,7 +263,7 @@ Roborobo (C++) examples are in the <your_roborobo_folder>/prj directory. Note th
 	 * Solution (see above): python3 -m pip install . --force --user -v
 	 * Comment: it can be pretty long. Be sure to use the -v option for verbose mode.
  * When executing _python3 tutorial.py_
-         * error: "no module name 'pyRoborobo'"
+	 * error: "no module name 'pyRoborobo'"
    	 * Solution 1: be sure that you have activated the conda environment (prefix of prompt should read something like _(roborobo)_)
    	 * Solution 2: if previous solution failed, this may me a more tricky problem. Use same python version (i.e.: update Conda, or use specific Python version in command line). Comment: Conda's Python and default Python command uses different versions. Check with _conda list | grep python_ and _python --version_. e.g.: conda uses python3.7, it must be be 3.12
  * When executing _python tutorial.py_ (or any other examples)
