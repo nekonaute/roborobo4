@@ -237,16 +237,18 @@ Roborobo (C++) examples are in the <your_roborobo_folder>/prj directory. Note th
 
 ## Troubleshooting
 
+Roborobo is regularly tested on the most recent Ubuntu LTS. While you should not encounter any problems with an up-to-date Linux distribution, it may be different with non-standard, outdated and/or badly managed Linux distributions. The following covers the most common errors. All of them are due to a badly configured system or faulty library installation.
+
  * First, be sure that conda uses the same Python version as the default one used in the terminal.
  	* To check which versions are used:
 		* for Python in Conda: _conda list | grep python_
 		* for Python in Terminal: _python3 --version_
-	* To force conda to use a specific version of Python: _conda create (...) python==3.12_
- 	* Update conda to the latest version if needed.   
+	* To force conda to use a specific version of Python: _conda create (...) python==3.12_. Updating conda to the latest version if needed.
+ 	* To force that the _python_ or _python3_ alias points to the expected python version, re-define the alias in your profile file. E.g.: with _bash_, edit the .bashrc file and add the following line at the end: _alias python='/usr/bin/python3.xx'_ with _xx_ the preferred version. Restart the terminal after modification.
  * When executing _conda activate roborobo_
         * error: the shell (e.g. bash) is not configured.
 	* solution 1: _conda init bash_. This may fail if your bash profile has been badly written. Fix: clean your bash profile
-   	* solution 2: use another shell (e.g. run _tcsh_, to be used before the command _conda activate roborobo_)
+   	* solution 2: use another shell. E.g. _tcsh_. I.e. restart installation from scratch. In the terminal, type _tcsh_ before the command _conda activate roborobo_ (during installation, and afterwards when coding).
  * When executing _python3 -m pip install . --force --user -v_
 	 * => error during execution "could NOT find SDL2" (hidden somewhere in the very long list of messages)
 	 * system install of SDL2 (must be super user). See apt commands above.
@@ -267,11 +269,10 @@ Roborobo (C++) examples are in the <your_roborobo_folder>/prj directory. Note th
   	 * first, be sure to check that you followed every step of the installation tutorial. If this is the case, then try the following.
   	 * Solution 1: be sure that you have activated the conda environment (prefix of prompt should read something like _(roborobo)_)
    	 * Solution 2: this may be a tricky problem of mismatch Python versions from Conda and command-line. Use same python versions (i.e.: update Conda, or use specific Python version in command line). Comment: Conda's Python and default Python command uses different versions. Check with _conda list | grep python_ and _python --version_. They should be the same.
-   	 * Solution 3: use _bash_ (not _tcsh_), add to the end of the .bashrc file: _alias python='/usr/bin/python3.xx'_ with _xx_ the preferred version. Restart terminal after modification.
  * When executing _python tutorial.py_ (or any other examples)
 	 * error looks like: ImportError: /lib/x86_64-linux-gnu/libwayland-client.so.0: undefined symbol: ffi_type_uint32, version LIBFFI_BASE_7.0
 	 * fix looks like: solution: export LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libffi.so.7
- * As of Fall 2023, Mac M1 does not seem to be able to run Roborobo (though it may work using a Linux virtual machine). You may use Virtualbox to install a Linux OS but this is still in beta as of early 2024. See dedicated [topic on virtualbox forum](https://forums.virtualbox.org/viewtopic.php?f=8&t=107344).
+ * As of early 2024, Mac M2 does not seem to be able to run Roborobo. You may use Virtualbox to install a Linux OS but this is still in beta for Mac M2 as of early 2024. Check dedicated [topic on virtualbox forum](https://forums.virtualbox.org/viewtopic.php?f=8&t=107344) for updates on the topic. Alternatively, you can use Parallels Desktop (but it is not free).
 ___
 
 _Thank you for using Roborobo!_
