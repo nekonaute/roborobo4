@@ -237,7 +237,7 @@ Roborobo (C++) examples are in the <your_roborobo_folder>/prj directory. Note th
 
 ## Troubleshooting
 
-Roborobo is regularly tested on the most recent Ubuntu LTS. While you should not encounter any problems with an up-to-date Linux distribution, it may be different with non-standard, outdated and/or badly managed Linux distributions. The following covers the most common errors. Note that before trying to fix things, be 100% sure that you followed _exactly_ the installation steps provided above.
+Roborobo is regularly tested on the most recent Ubuntu LTS. While you should not encounter any problems with an up-to-date Linux distribution, it may be different with non-standard, outdated and/or badly managed Linux distributions. The following covers the most common errors. Note that before trying to fix things, you should be 100% sure that you followed _exactly_ the installation steps provided above.
 
  * First, be sure that conda uses the same Python version as the default one used in the terminal.
  	* To check which versions are used:
