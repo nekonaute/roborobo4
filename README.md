@@ -272,7 +272,7 @@ Roborobo is regularly tested on the most recent Ubuntu LTS. While you should not
  * When executing _python tutorial.py_ (or any other examples)
 	 * error looks like: ImportError: /lib/x86_64-linux-gnu/libwayland-client.so.0: undefined symbol: ffi_type_uint32, version LIBFFI_BASE_7.0
 	 * fix looks like: solution: export LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libffi.so.7
- * As of early 2024, Mac M2 does not seem to be able to run Roborobo. You may use Virtualbox to install a Linux OS but this is still in beta for Mac M2 as of early 2024. Check dedicated [topic on virtualbox forum](https://forums.virtualbox.org/viewtopic.php?f=8&t=107344) for updates on the topic. Alternatively, you can use Parallels Desktop (but it is not free).
+ * As of early 2024, Mac M2 does not seem to be able to run Roborobo. You may use Virtualbox to install a Linux OS but this is still in beta for Mac M1/M2 as of early 2024. Check dedicated [topic on virtualbox forum](https://forums.virtualbox.org/viewtopic.php?f=8&t=107344) for updates on the topic. Alternatively, you can use Parallels Desktop (but it is not free).
 ___
 
 _Thank you for using Roborobo!_
