@@ -257,7 +257,7 @@ Roborobo is regularly tested on the most recent Ubuntu LTS. While you should not
          * easy fix (recommended): remove reference to Sphinx in setup.py (delete line 7 and remove _'build_sphinx': BuildDoc_ from line 64)
          * easy fix (not recommended): switch to a different version of Python (e.g. away from 3.10) 
  * When executing _python3 -m pip install . --force --user -v_
-	 * error: problem with missing MESA/GLX
+	 * error: problem with missing MESA/GLX (this is related to the OpenGL graphic library and its open-source implementation in Linux systems).
 	 * solution (see above): apt-get install -y mesa-utils libgl1-mesa-glx
  * When executing _python setup.py install --force --use -v_
 	 * error: "setup.py install is deprecated." (this should not happen if you follow the tutorial)
