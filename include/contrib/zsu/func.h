@@ -52,7 +52,7 @@ namespace zsu
 
  */
 template <class _Result, class _Arg>
-class unary_function_binder: public std::unary_function<_Result, _Arg>
+class unary_function_binder: public std::__unary_function<_Result, _Arg>
 {
   public:
     typedef _Result (*_Function)(_Arg);
