@@ -264,6 +264,12 @@ Roborobo is regularly tested on the most recent Ubuntu LTS. While you should not
 	 * You tried to run setup.py. Contrary to what the message says, setup.py isn't deprecated but can no longer be used directly.
 	 * Solution (see above): python3 -m pip install . --force --user -v
 	 * Comment: it can be pretty long. Be sure to use the -v option for verbose mode.
+ * When executing _python setup.py install --force --use -v_
+	 * error: "func.h:55:58: error: expected template-name before '<' token" or "Deprecated function in roborobo4/include/contrib/zsu/func.h, line 55"
+	 * cause: recent compiler may spot a deprecated function in roborobo4/include/contrib/zsu/func.h, line 55
+  	 * solution: roborobo4/include/contrib/zsu/func.h, line 55, replace:
+		* new: class unary_function_binder: public std::unary_function<_Result, _Arg>
+    		* old: class unary_function_binder: public std::__unary_function<_Result, _Arg>
  * When executing _python3 tutorial.py_ (or any other examples)
 	 * error: "no module name 'pyRoborobo'"
   	 * first, be sure to check that you followed every step of the installation tutorial. If this is the case, then try the following.
